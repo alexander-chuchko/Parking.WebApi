@@ -1,11 +1,12 @@
-﻿using CoolParking.WebAPI.Services.ParkingService;
+﻿using CoolParking.WebAPI.Models;
+using CoolParking.WebAPI.Services.ParkingService;
 using CoolParking.WebAPI.Services.VehicleService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoolParking.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]"), Produces("application/json")]
     [ApiController]
     public class VehiclesController : ControllerBase
     {
@@ -13,22 +14,34 @@ namespace CoolParking.WebAPI.Controllers
         private readonly IParkingService _parkingService;
         public VehiclesController(IVehicleService vehicleService, IParkingService parkingService)
         {
-            this._vehicleService = vehicleService;
-            this._parkingService = parkingService;
+            _vehicleService = vehicleService;
+            _parkingService = parkingService;
         }
 
-        //api/parking/balance
-        [HttpGet("balance")]
-        public ActionResult<decimal> GetBalance() //Tested
+        //api/vehicles
+        [HttpGet]
+        public ActionResult<IEnumerable<Vehicle>> GetAll()
         {
-            return Ok(_parkingService.GetBalance());
+            return Ok(_parkingService.GetVehicles());
         }
 
-        //api/parking/capacity
-        [HttpGet("capacity")]
-        public ActionResult<int> GetCapacity() //Tested
+        //api/vehicles/id 
+        [HttpGet("{id}", Name = "GetById")]
+        public ActionResult<Vehicle> GetById(string id)
         {
-            return Ok(_parkingService.GetCapacity());
+            if (!_vehicleService.IsValidRegistrationPlateNumber(id))
+            {
+                return BadRequest();
+            }
+
+            if (!_vehicleService.IsExists(id))
+            {
+                return NotFound();
+            }
+
+            return Ok(_parkingService.GetVehicleById(id));
         }
+
+
     }
 }
