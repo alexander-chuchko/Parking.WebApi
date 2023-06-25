@@ -46,5 +46,22 @@ namespace CoolParking.WebAPI.Controllers
             return Ok(transactions);
         }
 
+        //api/ransactions/topUpVehicle
+        [HttpPut("topUpVehicle")]
+        public ActionResult<Vehicle> GetTopVehicle([FromBody] Vehicle vehicle)
+        {
+            if (!_vehicleService.IsValidRegistrationPlateNumber(vehicle.Id) || vehicle.Balance <= 0)
+            {
+                return BadRequest();
+            }
+
+            if (!_vehicleService.IsExists(vehicle.Id))
+            {
+                return NotFound();
+            }
+
+            return Ok(_parkingService.TopUpVehicle(vehicle.Id, vehicle.Balance));
+        }
+
     }
 }
