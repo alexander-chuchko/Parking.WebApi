@@ -32,5 +32,19 @@ namespace CoolParking.WebAPI.Controllers
             return Ok(lastTransactions);
         }
 
+        [HttpGet("all")]
+        //api/transactions/all 
+        public ActionResult<string> GetAllTransaction()
+        {
+            var transactions = _parkingService.ReadFromLog();
+
+            if (transactions != null && transactions.Length <= 0) //If log file not found - Status Code: 404 Not Found
+            {
+                return NotFound();
+            }
+
+            return Ok(transactions);
+        }
+
     }
 }
