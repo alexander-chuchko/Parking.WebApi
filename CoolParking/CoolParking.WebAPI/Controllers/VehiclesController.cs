@@ -17,5 +17,11 @@ namespace CoolParking.WebAPI.Controllers
             this._parkingService = parkingService;
         }
 
+        //api/parking/balance
+        [HttpGet("balance")]
+        public ActionResult<decimal> GetBalance() //Tested
+        {
+            return Ok(_parkingService.GetBalance());
+        }
     }
 }
