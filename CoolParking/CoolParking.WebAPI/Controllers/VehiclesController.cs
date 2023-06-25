@@ -60,5 +60,24 @@ namespace CoolParking.WebAPI.Controllers
             return CreatedAtRoute("GetById", new { id = vehicle.Id }, vehicle);
         }
 
+        //api/vehicles/id
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id)
+        {
+            if (!_vehicleService.IsValidRegistrationPlateNumber(id) || !_vehicleService.IsPositive(id))
+            {
+                return BadRequest();
+            }
+
+            if (!_vehicleService.IsExists(id))
+            {
+                return NotFound();
+            }
+
+            _parkingService.RemoveVehicle(id);
+
+            return NoContent();
+        }
+
     }
 }
