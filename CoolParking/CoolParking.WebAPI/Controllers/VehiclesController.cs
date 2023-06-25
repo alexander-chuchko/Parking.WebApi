@@ -42,6 +42,23 @@ namespace CoolParking.WebAPI.Controllers
             return Ok(_parkingService.GetVehicleById(id));
         }
 
+        //api/vehicles
+        [HttpPost]
+        public IActionResult Add([FromBody] Vehicle vehicle)
+        {
+            int key = (int)vehicle.VehicleType;
+            if (!_vehicleService.IsValidRegistrationPlateNumber(vehicle.Id) ||
+                _vehicleService.IsExists(vehicle.Id) ||
+                _parkingService.GetFreePlaces() == 0 ||
+                vehicle.Balance <= Settings.tariffs[key])
+            {
+                return BadRequest();
+            }
+
+            _parkingService.AddVehicle(vehicle);
+
+            return CreatedAtRoute("GetById", new { id = vehicle.Id }, vehicle);
+        }
 
     }
 }
