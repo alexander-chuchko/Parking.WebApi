@@ -1,6 +1,5 @@
-﻿using CoolParking.WebAPI.Models;
-using CoolParking.WebAPI.Services.ParkingService;
-using CoolParking.WebAPI.Services.VehicleService;
+﻿using CoolParking.BL.Interfaces;
+using CoolParking.BL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoolParking.WebAPI.Controllers
@@ -9,11 +8,9 @@ namespace CoolParking.WebAPI.Controllers
     [ApiController]
     public class TransactionsController : ControllerBase
     {
-        private readonly IVehicleService _vehicleService;
         private readonly IParkingService _parkingService;
-        public TransactionsController(IVehicleService vehicleService, IParkingService parkingService)
+        public TransactionsController(IParkingService parkingService)
         {
-            this._vehicleService = vehicleService;
             this._parkingService = parkingService;
         }
 
@@ -59,7 +56,9 @@ namespace CoolParking.WebAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(_parkingService.TopUpVehicle(vehicle.Id, vehicle.Balance));
+            _parkingService.TopUpVehicle(vehicle.Id, vehicle.Balance);
+
+            return Ok();
         }
     }
 }

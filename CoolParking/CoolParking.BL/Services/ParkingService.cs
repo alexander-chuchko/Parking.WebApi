@@ -128,7 +128,7 @@ namespace CoolParking.BL.Services
             }
             else
             {
-                throw new ArgumentException();
+                throw new ArgumentException("This number does not exist");
             }
         }
 

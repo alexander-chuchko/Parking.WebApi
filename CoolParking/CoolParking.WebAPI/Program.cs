@@ -12,10 +12,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<IVehicleService, VehicleService>();
-builder.Services.AddTransient<ITimerService, TimerService>();
-builder.Services.AddTransient<ILogService, LogService>();
-builder.Services.AddSingleton<IParkingService, ParkingService>();
 
 var app = builder.Build();
 

@@ -702,6 +702,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "CoolParking.BL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/CoolParking.BL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CoolParking.BL.dll": {}
+        }
       }
     }
   },
@@ -2955,10 +2965,16 @@
         "system.xml.xdocument.4.0.11.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "CoolParking.BL/1.0.0": {
+      "type": "project",
+      "path": "../CoolParking.BL/CoolParking.BL.csproj",
+      "msbuildProject": "../CoolParking.BL/CoolParking.BL.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "CoolParking.BL >= 1.0.0",
       "Newtonsoft.Json >= 9.0.1",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
@@ -2995,7 +3011,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\Library\\AcademyBinary\\AcademiBinary 2023\\Projects\\WebAPI\\coolparkingwebapi\\CoolParking\\CoolParking.BL\\CoolParking.BL.csproj": {
+              "projectPath": "E:\\Library\\AcademyBinary\\AcademiBinary 2023\\Projects\\WebAPI\\coolparkingwebapi\\CoolParking\\CoolParking.BL\\CoolParking.BL.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

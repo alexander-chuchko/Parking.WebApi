@@ -1,0 +1,5 @@
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.csproj.AssemblyReference.cache
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.GeneratedMSBuildEditorConfig.editorconfig
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.AssemblyInfoInputs.cache
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.AssemblyInfo.cs
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.csproj.CoreCompileInputs.cache

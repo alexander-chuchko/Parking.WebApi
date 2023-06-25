@@ -1,5 +1,5 @@
-﻿using CoolParking.WebAPI.Services.ParkingService;
-using Microsoft.AspNetCore.Http;
+﻿
+using CoolParking.BL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoolParking.WebAPI.Controllers

@@ -1,4 +1,6 @@
-﻿using CoolParking.WebAPI.Models;
+﻿using CoolParking.BL.Interfaces;
+using CoolParking.BL.Models;
+using CoolParking.WebAPI.Models;
 using CoolParking.WebAPI.Services.ParkingService;
 using CoolParking.WebAPI.Services.VehicleService;
 using Microsoft.AspNetCore.Http;
@@ -10,11 +12,9 @@ namespace CoolParking.WebAPI.Controllers
     [ApiController]
     public class VehiclesController : ControllerBase
     {
-        private readonly IVehicleService _vehicleService;
         private readonly IParkingService _parkingService;
-        public VehiclesController(IVehicleService vehicleService, IParkingService parkingService)
+        public VehiclesController(IParkingService parkingService)
         {
-            _vehicleService = vehicleService;
             _parkingService = parkingService;
         }
 
