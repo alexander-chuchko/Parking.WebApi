@@ -1,7 +1,6 @@
 ﻿using CoolParking.WebAPI.Models;
 using CoolParking.WebAPI.Services.ParkingService;
 using CoolParking.WebAPI.Services.VehicleService;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoolParking.WebAPI.Controllers
@@ -62,6 +61,5 @@ namespace CoolParking.WebAPI.Controllers
 
             return Ok(_parkingService.TopUpVehicle(vehicle.Id, vehicle.Balance));
         }
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CoolParking.WebAPI.Enums;
+using Newtonsoft.Json;
 
 namespace CoolParking.WebAPI.Models
 {
