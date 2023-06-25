@@ -1,11 +1,12 @@
-﻿using CoolParking.BL.Models;
+﻿using CoolParking.BL.Interfaces;
+using CoolParking.BL.Models;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
 namespace CoolParking.BL.Services
 {
-    public class ApiService : IDisposable
+    public class ApiService : IApiService, IDisposable
     {
         private HttpClient _client;
 

@@ -7,5 +7,5 @@ using CoolParking.BL.Models;
 using CoolParking.BL.Services;
 
 ParkingService parkingService = new ParkingService(new TimerService(), new TimerService(), new LogService(Settings.logFilePath));
-ParkingManagementInterface navigation = new ParkingManagementInterface(parkingService);
+UserInterface navigation = new UserInterface(parkingService);
 navigation.RunApplication();

@@ -3,13 +3,13 @@ using CoolParking.BL.Models;
 
 namespace CoolParking.BL
 {
-    public class ParkingManagementInterface
+    public class UserInterface
     {
         private readonly IParkingService _parkingService;
         private readonly int numberMenuItems = 9;
         private string key;
 
-        public ParkingManagementInterface(IParkingService parkingService)
+        public UserInterface(IParkingService parkingService)
         {
             _parkingService = parkingService;
         }
