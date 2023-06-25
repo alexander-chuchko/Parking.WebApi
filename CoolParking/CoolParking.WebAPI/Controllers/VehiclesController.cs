@@ -1,10 +1,7 @@
 ﻿using CoolParking.BL.Interfaces;
 using CoolParking.BL.Models;
-using CoolParking.WebAPI.Models;
-using CoolParking.WebAPI.Services.ParkingService;
-using CoolParking.WebAPI.Services.VehicleService;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.ObjectModel;
 
 namespace CoolParking.WebAPI.Controllers
 {
@@ -25,36 +22,38 @@ namespace CoolParking.WebAPI.Controllers
             return Ok(_parkingService.GetVehicles());
         }
 
+
         //api/vehicles/id 
         [HttpGet("{id}", Name = "GetById")]
         public ActionResult<Vehicle> GetById(string id)
         {
-            if (!_vehicleService.IsValidRegistrationPlateNumber(id))
+            if (!Vehicle.IsValidId(id))
             {
                 return BadRequest();
             }
 
-            if (!_vehicleService.IsExists(id))
+            var vehicle = _parkingService.GetVehicles().FirstOrDefault(v => v.Id == id);
+
+            if (vehicle == null)
             {
                 return NotFound();
             }
 
-            return Ok(_parkingService.GetVehicleById(id));
+            return Ok(vehicle);
         }
 
         //api/vehicles
         [HttpPost]
         public IActionResult Add([FromBody] Vehicle vehicle)
         {
+            
             int key = (int)vehicle.VehicleType;
-            if (!_vehicleService.IsValidRegistrationPlateNumber(vehicle.Id) ||
-                _vehicleService.IsExists(vehicle.Id) ||
-                _parkingService.GetFreePlaces() == 0 ||
-                vehicle.Balance <= Settings.tariffs[key])
+
+            if (!Vehicle.IsValidId(vehicle.Id))
             {
                 return BadRequest();
             }
-
+            
             _parkingService.AddVehicle(vehicle);
 
             return CreatedAtRoute("GetById", new { id = vehicle.Id }, vehicle);
@@ -64,12 +63,14 @@ namespace CoolParking.WebAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
-            if (!_vehicleService.IsValidRegistrationPlateNumber(id) || !_vehicleService.IsPositive(id))
+            if (!Vehicle.IsValidId(id))
             {
                 return BadRequest();
             }
 
-            if (!_vehicleService.IsExists(id))
+            var vehicle = _parkingService.GetVehicles().FirstOrDefault(v => v.Id == id);
+
+            if (vehicle == null)
             {
                 return NotFound();
             }

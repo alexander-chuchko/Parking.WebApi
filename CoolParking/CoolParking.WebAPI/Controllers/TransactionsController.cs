@@ -46,12 +46,14 @@ namespace CoolParking.WebAPI.Controllers
         [HttpPut("topUpVehicle")]
         public ActionResult<Vehicle> GetTopVehicle([FromBody] Vehicle vehicle)
         {
-            if (!_vehicleService.IsValidRegistrationPlateNumber(vehicle.Id) || vehicle.Balance <= 0)
+            if (!Vehicle.IsValidId(vehicle.Id) || vehicle.Balance <= 0)
             {
                 return BadRequest();
             }
 
-            if (!_vehicleService.IsExists(vehicle.Id))
+            var foundVehicle = _parkingService.GetVehicles().FirstOrDefault(v => v.Id == vehicle.Id);
+
+            if (foundVehicle == null)
             {
                 return NotFound();
             }

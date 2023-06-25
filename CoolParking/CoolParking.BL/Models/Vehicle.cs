@@ -52,7 +52,7 @@ namespace CoolParking.BL.Models
             }
         }
 
-        private bool IsValidId(string id)
+        public static bool IsValidId(string id)
         {
             return new Regex(@"^[A-Z]{2}-[0-9]{4}-[A-Z]{2}$").IsMatch(id);
         }
