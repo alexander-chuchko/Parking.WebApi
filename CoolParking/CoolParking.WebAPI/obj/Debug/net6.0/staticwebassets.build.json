@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "JhRvZk3OeBp8BKhb9iUdCdR7xPGiuDpyHXgFdAQiHTQ=",
+  "Source": "CoolParking.WebAPI",
+  "BasePath": "_content/CoolParking.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

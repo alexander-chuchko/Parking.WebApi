@@ -6699,11 +6699,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Library\\AcademyBinary\\AcademiBinary 2023\\Projects\\CoolParcking\\cool-parking\\CoolParking\\CoolParking.BL.Tests\\CoolParking.BL.Tests.csproj",
+      "projectUniqueName": "E:\\Library\\AcademyBinary\\AcademiBinary 2023\\Projects\\WebAPI\\coolparkingwebapi\\CoolParking\\CoolParking.BL.Tests\\CoolParking.BL.Tests.csproj",
       "projectName": "CoolParking.BL.Tests",
-      "projectPath": "E:\\Library\\AcademyBinary\\AcademiBinary 2023\\Projects\\CoolParcking\\cool-parking\\CoolParking\\CoolParking.BL.Tests\\CoolParking.BL.Tests.csproj",
+      "projectPath": "E:\\Library\\AcademyBinary\\AcademiBinary 2023\\Projects\\WebAPI\\coolparkingwebapi\\CoolParking\\CoolParking.BL.Tests\\CoolParking.BL.Tests.csproj",
       "packagesPath": "C:\\Users\\chuch\\.nuget\\packages\\",
-      "outputPath": "E:\\Library\\AcademyBinary\\AcademiBinary 2023\\Projects\\CoolParcking\\cool-parking\\CoolParking\\CoolParking.BL.Tests\\obj\\",
+      "outputPath": "E:\\Library\\AcademyBinary\\AcademiBinary 2023\\Projects\\WebAPI\\coolparkingwebapi\\CoolParking\\CoolParking.BL.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6725,8 +6725,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "E:\\Library\\AcademyBinary\\AcademiBinary 2023\\Projects\\CoolParcking\\cool-parking\\CoolParking\\CoolParking.BL\\CoolParking.BL.csproj": {
-              "projectPath": "E:\\Library\\AcademyBinary\\AcademiBinary 2023\\Projects\\CoolParcking\\cool-parking\\CoolParking\\CoolParking.BL\\CoolParking.BL.csproj"
+            "E:\\Library\\AcademyBinary\\AcademiBinary 2023\\Projects\\WebAPI\\coolparkingwebapi\\CoolParking\\CoolParking.BL\\CoolParking.BL.csproj": {
+              "projectPath": "E:\\Library\\AcademyBinary\\AcademiBinary 2023\\Projects\\WebAPI\\coolparkingwebapi\\CoolParking\\CoolParking.BL\\CoolParking.BL.csproj"
             }
           }
         }
