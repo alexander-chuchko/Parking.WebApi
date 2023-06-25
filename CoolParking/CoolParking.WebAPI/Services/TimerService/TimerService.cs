@@ -1,6 +1,6 @@
 ﻿namespace CoolParking.WebAPI.Services.TimerService
 {
-    public class TimerService
+    public class TimerService : ITimerService
     {
     }
 }
