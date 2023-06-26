@@ -29,5 +29,16 @@ namespace CoolParking.UI
         {
             return true;
         }
+
+        public static bool IsValidMenuItem(string item)
+        {
+            bool isValidItem = false;   
+            if (int.TryParse(item, out int result))
+            {
+                isValidItem = result > 0 && result <= Constants.Number_Menu_Items;
+            }
+
+            return isValidItem;
+        }
     }
 }

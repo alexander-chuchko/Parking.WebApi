@@ -7,7 +7,6 @@ namespace CoolParking.BL
     public class UserInterface
     {
         private readonly IApiService _apiService;
-        private readonly int numberMenuItems = 9;
         private string key;
         private Dictionary<int, Action> methodDictionary;
 
@@ -216,7 +215,7 @@ namespace CoolParking.BL
 
                 key = Console.ReadLine();
 
-                if (int.TryParse(key, out int number) && number > 0 && number <= numberMenuItems)
+                if (int.TryParse(key, out int number) && number > 0 && number <= Constants.Number_Menu_Items)
                 {
                     switch (number)
                     {
