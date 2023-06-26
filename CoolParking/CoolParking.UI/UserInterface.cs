@@ -9,14 +9,32 @@ namespace CoolParking.BL
         private readonly IApiService _apiService;
         private readonly int numberMenuItems = 9;
         private string key;
+        private Dictionary<int, Action> methodDictionary;
 
         public UserInterface(IApiService apiService)
         {
             //_parkingService = parkingService;
-            _apiService = apiService;   
+            _apiService = apiService;
+            methodDictionary = InitializationMenuItems();
         }
 
         #region ---Helpers---
+
+        private Dictionary<int, Action> InitializationMenuItems() 
+        {
+            return new Dictionary<int, Action>()
+            {
+                {1, DisplayCurrentBalance},
+                {2, DisplayEarnings},
+                {3, DisplayNumberFreeAndOccupiedSpaces},
+                {4, DisplayListVehiclesFundsLocated},
+                {5, PutVehicleAidForParking},
+                {6, PickUpVehicle},
+                {7, TopUpBalanceCar},
+                {8, DisplayTransactionHistory},
+                {9, DisplayAllTransactionsCurrentPeriod},
+            };
+        }
 
         //Display the current Parking balance on the screen
         private async void DisplayCurrentBalance()
@@ -67,7 +85,7 @@ namespace CoolParking.BL
             }
         }
 
-        //Display the list of Tr. vehicles located in the Parking lot
+        //Display the list of vehicles located in the Parking lot
         private async void DisplayListVehiclesFundsLocated()
         {
             int count = 0;
@@ -95,7 +113,7 @@ namespace CoolParking.BL
             }
         }
 
-        //Pick up the Vehicle from the Parking lot
+        //Pick up the vehicle from the parking lot
         private async void PickUpVehicle()
         {
             Console.WriteLine("\tEnter vehicle number");
@@ -130,7 +148,7 @@ namespace CoolParking.BL
             }
         }
 
-        //Display all Parking Transactions for the current period (before logging)
+        //Display all parking transactions for the current period (before logging)
         private async void DisplayAllTransactionsCurrentPeriod()
         {
             var transactionInfo = await _apiService.GetLastTransaction();
