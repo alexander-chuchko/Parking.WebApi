@@ -69,7 +69,7 @@ namespace CoolParking.BL
         }
 
         //Display the list of Tr. vehicles located in the Parking lot
-        private async void DisplayListTrFundsLocated()
+        private async void DisplayListVehiclesFundsLocated()
         {
             if (await _apiService.GetFreePlacesParking() < Settings.ParkingCapacity)
             {
@@ -88,7 +88,7 @@ namespace CoolParking.BL
         }
 
         //Put the Vehicle in Parking
-        private async void PutTrAidForParking()
+        private async void PutVehicleAidForParking()
         {
             try
             {
@@ -113,7 +113,7 @@ namespace CoolParking.BL
                 try
                 {
                     Console.WriteLine("\tSpecify the index of the vehicle");
-                    DisplayListTrFundsLocated();
+                    DisplayListVehiclesFundsLocated();
                     string? id = Console.ReadLine();
 
                     var vehicleses = _parkingService.GetVehicles();
@@ -244,13 +244,13 @@ namespace CoolParking.BL
                         case 4:
                             ClearConsole();
                             DisplayInfo();
-                            DisplayListTrFundsLocated();
+                            DisplayListVehiclesFundsLocated();
                             break;
 
                         case 5:
                             ClearConsole();
                             DisplayInfo();
-                            PutTrAidForParking();
+                            PutVehicleAidForParking();
                             break;
 
                         case 6:
