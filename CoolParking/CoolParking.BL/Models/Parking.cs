@@ -11,6 +11,7 @@ namespace CoolParking.BL.Models
         public DateTime? StartTime { get; set; }
 
         private static Parking? instance;
+        private static readonly object lockObject = new object();
 
         public Parking()
         {
@@ -18,9 +19,12 @@ namespace CoolParking.BL.Models
 
         public static Parking GetInstance()
         {
-            if (instance == null)
+            lock (lockObject)
             {
-                instance = new Parking();
+                if (instance == null)
+                {
+                    instance = new Parking();
+                }
             }
 
             return instance;
@@ -28,6 +32,12 @@ namespace CoolParking.BL.Models
 
         public void Dispose()
         {
+            lock (lockObject)
+            {
+                Vehicles.Clear();
+                Balance = 0;
+                StartTime = null;
+            }
         }
 
         public void DisposeInstance()

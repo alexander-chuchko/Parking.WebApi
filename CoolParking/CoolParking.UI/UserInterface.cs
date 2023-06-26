@@ -212,12 +212,10 @@ namespace CoolParking.BL
 
             do
             {
-
                 key = Console.ReadLine();
-
-                if (int.TryParse(key, out int number) && number > 0 && number <= Constants.Number_Menu_Items)
+                if (Validation.IsValidMenuItem(key))
                 {
-                    switch (number)
+                    switch (int.Parse(key))
                     {
                         case 1:
                             ClearConsole();
