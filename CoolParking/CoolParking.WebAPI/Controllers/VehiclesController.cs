@@ -57,6 +57,7 @@ namespace CoolParking.WebAPI.Controllers
         //api/vehicles/id
         [HttpDelete("{id}")]
         public IActionResult Delete(string id) //Tested
+        
         {
             if (!Vehicle.IsValidId(id))
             {

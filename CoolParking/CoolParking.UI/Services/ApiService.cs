@@ -40,7 +40,7 @@ namespace CoolParking.BL.Services
                         addedVehicle = await response.Content.ReadFromJsonAsync<Vehicle>();
                     }
 
-                    ShowStatusCode(response.StatusCode, nameof(AddVehicle));
+                    //ShowStatusCode(response.StatusCode, nameof(AddVehicle));
                 }
             }
             catch (Exception ex)
@@ -96,7 +96,7 @@ namespace CoolParking.BL.Services
                         addedVehicle = await response.Content.ReadFromJsonAsync<Vehicle>();
                     }
 
-                    ShowStatusCode(response.StatusCode, nameof(GetByIdVehicle));
+                    //ShowStatusCode(response.StatusCode, nameof(GetByIdVehicle));
                 }
             }
             catch (Exception ex)
@@ -141,7 +141,7 @@ namespace CoolParking.BL.Services
                         transactionInfos = await response.Content.ReadFromJsonAsync<TransactionInfo[]>();
                     }
 
-                    ShowStatusCode(response.StatusCode, nameof(GetLastTransaction));
+                    //ShowStatusCode(response.StatusCode, nameof(GetLastTransaction));
                 }
 
                 return transactionInfos;
@@ -171,7 +171,7 @@ namespace CoolParking.BL.Services
                         transactions = await response.Content.ReadAsStringAsync();
                     }
 
-                    ShowStatusCode(response.StatusCode, nameof(GetTransactionAll));
+                    //ShowStatusCode(response.StatusCode, nameof(GetTransactionAll));
                 }
             }
             catch (Exception ex)
@@ -202,7 +202,7 @@ namespace CoolParking.BL.Services
                         vehicle = await response.Content.ReadFromJsonAsync<Vehicle>();
                     }
 
-                    ShowStatusCode(response.StatusCode, nameof(TopUpVehicle));
+                    //ShowStatusCode(response.StatusCode, nameof(TopUpVehicle));
 
                 }
             }
@@ -235,7 +235,7 @@ namespace CoolParking.BL.Services
                         capacity = await response.Content.ReadFromJsonAsync<int>();
                     }
 
-                    ShowStatusCode(response.StatusCode, nameof(GetCapacityParking));
+                    //ShowStatusCode(response.StatusCode, nameof(GetCapacityParking));
 
                 }
             }
@@ -264,7 +264,7 @@ namespace CoolParking.BL.Services
                         freePlaces = await response.Content.ReadFromJsonAsync<int>();
                     }
 
-                    ShowStatusCode(response.StatusCode, nameof(GetFreePlacesParking));
+                    //ShowStatusCode(response.StatusCode, nameof(GetFreePlacesParking));
                 }
             }
             catch (Exception ex)
@@ -292,7 +292,7 @@ namespace CoolParking.BL.Services
                         balance = await response.Content.ReadFromJsonAsync<int>();
                     }
 
-                    ShowStatusCode(response.StatusCode, nameof(GetBalanceParking));
+                    //ShowStatusCode(response.StatusCode, nameof(GetBalanceParking));
                 }
             }
             catch (Exception ex)

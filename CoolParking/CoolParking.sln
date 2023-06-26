@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoolParking.BL.Tests", "Coo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoolParking.WebAPI", "CoolParking.WebAPI\CoolParking.WebAPI.csproj", "{824B8F72-475B-4267-875C-52D36E7B7E24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolParking.UI", "CoolParking.UI\CoolParking.UI.csproj", "{CCE28790-9D4B-475B-81DE-066340B2C0F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoolParking.UI", "CoolParking.UI\CoolParking.UI.csproj", "{CCE28790-9D4B-475B-81DE-066340B2C0F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolParking.Common", "CoolParking.Common\CoolParking.Common.csproj", "{4F008069-A359-436B-A9FB-03D41B247523}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{CCE28790-9D4B-475B-81DE-066340B2C0F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCE28790-9D4B-475B-81DE-066340B2C0F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCE28790-9D4B-475B-81DE-066340B2C0F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F008069-A359-436B-A9FB-03D41B247523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F008069-A359-436B-A9FB-03D41B247523}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F008069-A359-436B-A9FB-03D41B247523}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F008069-A359-436B-A9FB-03D41B247523}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
