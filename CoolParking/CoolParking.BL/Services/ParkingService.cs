@@ -177,19 +177,6 @@ namespace CoolParking.BL.Services
                     decimal sumFine = 0;
                     decimal tariff = Settings.Tariffs[(int)vehicles.VehicleType];
 
-                    /*
-                    if (vehicles.Balance < 0)
-                    {
-                        sumFine = tariff * Settings.PenaltyCoefficient;
-                    }
-                    else if (vehicles.Balance < tariff)
-                    {
-                        sumFine = vehicles.Balance + ((tariff - vehicles.Balance) * Settings.PenaltyCoefficient);
-                    }
-                    else if (vehicles.Balance >= tariff)
-                    {
-                        sumFine = tariff;
-                    }*/
                     sumFine = GetPenaltySum(vehicles.Balance, tariff);
 
                     vehicles.Balance -= sumFine;

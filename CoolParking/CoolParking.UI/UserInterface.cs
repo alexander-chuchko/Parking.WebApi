@@ -83,9 +83,9 @@ namespace CoolParking.BL
 
             try
             {
-               string transactions = await _apiService.GetTransactionAll();
-               string[] arrayTransaction = transactions.Split(new string[] { "\\r", "\\n", "\""  }, StringSplitOptions.RemoveEmptyEntries);
-               transactions.ToList().ForEach(i => Console.WriteLine($"\t{i}"));
+                string transactions = await _apiService.GetTransactionAll();
+                string[] arrayTransaction = transactions.Split(new string[] { "\\r", "\\n", "\""  }, StringSplitOptions.RemoveEmptyEntries);
+                arrayTransaction.ToList().ForEach(i => Console.WriteLine($"\t{i}"));
             }
             catch (Exception)
             {
@@ -102,7 +102,14 @@ namespace CoolParking.BL
             int count = 0;
             Console.WriteLine($"\tVehicle list:\n");
             var vehicles = await _apiService.GetAllVehicleses();
-            vehicles.ToList().ForEach(v => Console.WriteLine($"\t{++count} - Id:{v.Id} VehicleType:{v.VehicleType} Balance:{v.Balance}"));
+            if (vehicles != null && vehicles.Count() > 0)
+            {
+                vehicles.ToList().ForEach(v => Console.WriteLine($"\t{++count} - Id:{v.Id} VehicleType:{v.VehicleType} Balance:{v.Balance}"));
+            }
+            else 
+            {
+                Console.WriteLine("\tThere are no vehicles in the parking lot");
+            }
         }
 
         //Put the Vehicle in Parking
@@ -157,7 +164,8 @@ namespace CoolParking.BL
 
             if (Validation.IsValidId(id) && Validation.IsPositive(topUpAmount))
             {
-                await _apiService.TopUpVehicle(id, Decimal.Parse(topUpAmount));
+                var vehicle = await _apiService.TopUpVehicle(id, Decimal.Parse(topUpAmount));
+                Console.WriteLine($"\tVehicle balance successfully topped up - Id:{vehicle.Id} VehicleType:{vehicle.VehicleType} Balance:{vehicle.Balance}");
             }
             else
             {
