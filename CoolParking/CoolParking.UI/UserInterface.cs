@@ -12,7 +12,6 @@ namespace CoolParking.BL
 
         public UserInterface(IApiService apiService)
         {
-            //_parkingService = parkingService;
             _apiService = apiService;
             methodDictionary = GetInitializedMenuItems();
         }
@@ -59,6 +58,7 @@ namespace CoolParking.BL
         {
             ClearConsole();
             DisplayInfo();
+
             var transactionsLog = await _apiService.GetLastTransaction();
 
             if (transactionsLog != null)
@@ -205,7 +205,7 @@ namespace CoolParking.BL
 
         private void DisplayInfo()
         {
-            Console.Clear();
+            ClearConsole();
             ChangedColor(ConsoleColor.Red);
 
             Console.WriteLine("\n\t\t\t\tCOOL PARKING");
