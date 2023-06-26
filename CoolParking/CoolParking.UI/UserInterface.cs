@@ -14,12 +14,12 @@ namespace CoolParking.BL
         {
             //_parkingService = parkingService;
             _apiService = apiService;
-            methodDictionary = InitializationMenuItems();
+            methodDictionary = GetInitializedMenuItems();
         }
 
         #region ---Helpers---
 
-        private Dictionary<int, Action> InitializationMenuItems() 
+        private Dictionary<int, Action> GetInitializedMenuItems() 
         {
             return new Dictionary<int, Action>()
             {
@@ -38,12 +38,17 @@ namespace CoolParking.BL
         //Display the current Parking balance on the screen
         private async void DisplayCurrentBalance()
         {
+            ClearConsole();
+            DisplayInfo();
             Console.WriteLine($"\tParking balance: {await _apiService.GetBalanceParking()}");
         }
 
         //Display the list of Tr. vehicles located in the Parking lot
         private async void DisplayNumberFreeAndOccupiedSpaces()
         {
+            ClearConsole();
+            DisplayInfo();
+
             Console.WriteLine($"\tNumber of free - " +
                 $"{await _apiService.GetFreePlacesParking()} / employed -" +
                 $" {await _apiService.GetCapacityParking() - await _apiService.GetFreePlacesParking()}");
@@ -52,6 +57,8 @@ namespace CoolParking.BL
         //Display the amount of earned funds for the current period (before recording in the log)
         private async void DisplayEarnings()
         {
+            ClearConsole();
+            DisplayInfo();
             var transactionsLog = await _apiService.GetLastTransaction();
 
             if (transactionsLog != null)
@@ -67,6 +74,9 @@ namespace CoolParking.BL
         //Display the history of Transactions on the screen (reading data from the Transactions.log file)
         private async void DisplayTransactionHistory()
         {
+            ClearConsole();
+            DisplayInfo();
+
             try
             {
                 string arrayTransaction = await _apiService.GetTransactionAll();
@@ -87,6 +97,9 @@ namespace CoolParking.BL
         //Display the list of vehicles located in the Parking lot
         private async void DisplayListVehiclesFundsLocated()
         {
+            ClearConsole();
+            DisplayInfo();
+
             int count = 0;
             Console.WriteLine($"\tVehicle list:\n");
 
@@ -99,6 +112,9 @@ namespace CoolParking.BL
         //Put the Vehicle in Parking
         private async void PutVehicleAidForParking()
         {
+            ClearConsole();
+            DisplayInfo();
+
             try
             {
                 //Написать метод, который лучше генерировал транспортное средство
@@ -115,6 +131,9 @@ namespace CoolParking.BL
         //Pick up the vehicle from the parking lot
         private async void PickUpVehicle()
         {
+            ClearConsole();
+            DisplayInfo();
+
             Console.WriteLine("\tEnter vehicle number");
             DisplayListVehiclesFundsLocated();
             string? id = Console.ReadLine();
@@ -132,6 +151,9 @@ namespace CoolParking.BL
         //Replenish the balance of a specific financial instrument.
         private async void TopUpBalanceCar()
         {
+            ClearConsole();
+            DisplayInfo();
+
             Console.WriteLine("\tEnter vehicle number:");
             string? id = Console.ReadLine();
             Console.WriteLine("\tEnter replenishment amount:");
@@ -150,6 +172,9 @@ namespace CoolParking.BL
         //Display all parking transactions for the current period (before logging)
         private async void DisplayAllTransactionsCurrentPeriod()
         {
+            ClearConsole();
+            DisplayInfo();
+
             var transactionInfo = await _apiService.GetLastTransaction();
 
             if (transactionInfo!=null && transactionInfo.Length > 0)
@@ -213,67 +238,10 @@ namespace CoolParking.BL
             do
             {
                 key = Console.ReadLine();
-                if (Validation.IsValidMenuItem(key))
+
+                if (Validation.IsValidMenuItem(key, methodDictionary.Count))
                 {
-                    switch (int.Parse(key))
-                    {
-                        case 1:
-                            ClearConsole();
-                            DisplayInfo();
-                            DisplayCurrentBalance();
-                            break;
-                        case 2:
-                            ClearConsole();
-                            DisplayInfo();
-                            DisplayEarnings();
-                            break;
-
-                        case 3:
-                            ClearConsole();
-                            DisplayInfo();
-                            DisplayNumberFreeAndOccupiedSpaces();
-                            break;
-
-                        case 4:
-                            ClearConsole();
-                            DisplayInfo();
-                            DisplayListVehiclesFundsLocated();
-                            break;
-
-                        case 5:
-                            ClearConsole();
-                            DisplayInfo();
-                            PutVehicleAidForParking();
-                            break;
-
-                        case 6:
-                            ClearConsole();
-                            DisplayInfo();
-                            PickUpVehicle();
-                            break;
-
-                        case 7:
-                            ClearConsole();
-                            DisplayInfo();
-                            TopUpBalanceCar();
-                            break;
-
-                        case 8:
-                            ClearConsole();
-                            DisplayInfo();
-                            DisplayTransactionHistory();
-                            break;
-
-                        case 9:
-                            ClearConsole();
-                            DisplayInfo();
-                            DisplayAllTransactionsCurrentPeriod();
-                            break;
-
-                        default:
-                            Console.WriteLine("\tInvalid value specified!");
-                            break;
-                    }
+                    methodDictionary[int.Parse(key)].Invoke();
                 }
                 else if (key != "e")
                 {
