@@ -6,7 +6,6 @@ namespace CoolParking.BL
 {
     public class UserInterface
     {
-        private readonly IParkingService _parkingService;
         private readonly IApiService _apiService;
         private readonly int numberMenuItems = 9;
         private string key;
@@ -71,19 +70,12 @@ namespace CoolParking.BL
         //Display the list of Tr. vehicles located in the Parking lot
         private async void DisplayListVehiclesFundsLocated()
         {
-            if (await _apiService.GetFreePlacesParking() < Settings.ParkingCapacity)
-            {
-                int count = 0;
-                Console.WriteLine($"\tVehicle list:\n");
+            int count = 0;
+            Console.WriteLine($"\tVehicle list:\n");
 
-                foreach (var item in _parkingService.GetVehicles())
-                {
-                    Console.WriteLine($"\t{++count} - Id:{item.Id} VehicleType:{item.VehicleType} Balance:{item.Balance}");
-                }
-            }
-            else
+            foreach (var item in await _apiService.GetAllVehicleses())
             {
-                Console.WriteLine("\tThere are no cars in the parking lot");
+                Console.WriteLine($"\t{++count} - Id:{item.Id} VehicleType:{item.VehicleType} Balance:{item.Balance}");
             }
         }
 
@@ -106,31 +98,17 @@ namespace CoolParking.BL
         //Pick up the Vehicle from the Parking lot
         private async void PickUpVehicle()
         {
-            var res = await _apiService.GetAllVehicleses();
+            Console.WriteLine("\tEnter vehicle number");
+            DisplayListVehiclesFundsLocated();
+            string? id = Console.ReadLine();
 
-            if (res.Count() > 0)
+            if (Validation.IsValidId(id))
             {
-                try
-                {
-                    Console.WriteLine("\tSpecify the index of the vehicle");
-                    DisplayListVehiclesFundsLocated();
-                    string? id = Console.ReadLine();
-
-                    var vehicleses = _parkingService.GetVehicles();
-                    //Заменить
-                    if (id != null && int.TryParse(id, out int convertId) && convertId > 0 && convertId <= vehicleses.Count)
-                    {
-                        await _apiService.DeleteVehicle(vehicleses[convertId - 1].Id);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"\t{ex.Message}");
-                }
+                await _apiService.DeleteVehicle(id);
             }
-            else
+            else 
             {
-                Console.WriteLine("\tThere are no cars in the parking lot");
+                Console.WriteLine("\tEnter incorrect data");
             }
         }
 
@@ -196,13 +174,13 @@ namespace CoolParking.BL
             Console.ForegroundColor = ConsoleColor.White;
 
             Console.WriteLine("\n\t" +
-                "1 - Display the current balance of the Parking Lot\n\t" +
+                "1 - Display the current balance of the parking lot\n\t" +
                 "2 - Display the amount of money earned for the current period (before logging)\n\t" +
                 "3 - Display the number of free/occupied parking spaces on the screen\n\t" +
-                "4 - Display the list of Tr. funds located in the Parking lot\n\t" +
-                "5 - Put Tr. aid for parking\n\t" +
-                "6 - Pick up the vehicle from the Parking lot\n\t" +
-                "7 - Top up the balance of a specific Tr. funds\n\t" +
+                "4 - Display the list of vehicles in the parking lot\n\t" +
+                "5 - Put the vehicle in parking\n\t" +
+                "6 - Pick up the vehicle from the parking lot\n\t" +
+                "7 - Top up the balance of a specific vehicle\n\t" +
                 "8 - Display transaction history\n\t" +
                 "9 - Display all parking transactions for the current period");
 

@@ -3,7 +3,6 @@ E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\Co
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\obj\Debug\net6.0\CoolParking.WebAPI.AssemblyInfoInputs.cache
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\obj\Debug\net6.0\CoolParking.WebAPI.AssemblyInfo.cs
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\obj\Debug\net6.0\CoolParking.WebAPI.csproj.CoreCompileInputs.cache
-E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\obj\Debug\net6.0\CoolParking.WebAPI.MvcApplicationPartsAssemblyInfo.cs
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\obj\Debug\net6.0\CoolParking.WebAPI.MvcApplicationPartsAssemblyInfo.cache
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\bin\Debug\net6.0\appsettings.Development.json
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\bin\Debug\net6.0\appsettings.json
@@ -13,9 +12,12 @@ E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\Co
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\bin\Debug\net6.0\CoolParking.WebAPI.dll
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\bin\Debug\net6.0\CoolParking.WebAPI.pdb
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\bin\Debug\net6.0\CoolParking.BL.dll
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\bin\Debug\net6.0\CoolParking.BL.pdb
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\obj\Debug\net6.0\staticwebassets.build.json
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\obj\Debug\net6.0\staticwebassets.development.json
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\obj\Debug\net6.0\scopedcss\bundle\CoolParking.WebAPI.styles.css
@@ -25,3 +27,4 @@ E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\Co
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\obj\Debug\net6.0\CoolParking.WebAPI.pdb
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\obj\Debug\net6.0\CoolParking.WebAPI.genruntimeconfig.cache
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\obj\Debug\net6.0\ref\CoolParking.WebAPI.dll
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.WebAPI\obj\Debug\net6.0\CoolParking.WebAPI.MvcApplicationPartsAssemblyInfo.cs

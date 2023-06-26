@@ -1,7 +1,6 @@
 ﻿using CoolParking.BL.Interfaces;
 using CoolParking.BL.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.ObjectModel;
 
 namespace CoolParking.WebAPI.Controllers
 {

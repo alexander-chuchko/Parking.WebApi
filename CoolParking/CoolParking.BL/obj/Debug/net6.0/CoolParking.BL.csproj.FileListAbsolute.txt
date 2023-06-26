@@ -13,9 +13,7 @@ E:\Library\AcademyBinary\AcademiBinary 2023\Projects\CoolParcking\cool-parking\C
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\CoolParcking\cool-parking\CoolParking\CoolParking.BL\obj\Debug\net6.0\CoolParking.BL.pdb
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\CoolParcking\cool-parking\CoolParking\CoolParking.BL\obj\Debug\net6.0\CoolParking.BL.genruntimeconfig.cache
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\CoolParcking\cool-parking\CoolParking\CoolParking.BL\obj\Debug\net6.0\ref\CoolParking.BL.dll
-E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.BL\bin\Debug\net6.0\CoolParking.BL.exe
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.BL\bin\Debug\net6.0\CoolParking.BL.deps.json
-E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.BL\bin\Debug\net6.0\CoolParking.BL.runtimeconfig.json
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.BL\bin\Debug\net6.0\CoolParking.BL.dll
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.BL\bin\Debug\net6.0\CoolParking.BL.pdb
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.BL\obj\Debug\net6.0\CoolParking.BL.csproj.AssemblyReference.cache
@@ -26,5 +24,4 @@ E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\Co
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.BL\obj\Debug\net6.0\CoolParking.BL.dll
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.BL\obj\Debug\net6.0\refint\CoolParking.BL.dll
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.BL\obj\Debug\net6.0\CoolParking.BL.pdb
-E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.BL\obj\Debug\net6.0\CoolParking.BL.genruntimeconfig.cache
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.BL\obj\Debug\net6.0\ref\CoolParking.BL.dll
