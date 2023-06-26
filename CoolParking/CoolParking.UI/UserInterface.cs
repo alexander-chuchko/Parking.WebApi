@@ -1,39 +1,42 @@
 ﻿using CoolParking.BL.Interfaces;
 using CoolParking.BL.Models;
+using CoolParking.UI;
 
 namespace CoolParking.BL
 {
     public class UserInterface
     {
         private readonly IParkingService _parkingService;
+        private readonly IApiService _apiService;
         private readonly int numberMenuItems = 9;
         private string key;
 
-        public UserInterface(IParkingService parkingService)
+        public UserInterface(IApiService apiService)
         {
-            _parkingService = parkingService;
+            //_parkingService = parkingService;
+            _apiService = apiService;   
         }
 
         #region ---Helpers---
 
         //Display the current Parking balance on the screen
-        private void DisplayCurrentBalance()
+        private async void DisplayCurrentBalance()
         {
-            Console.WriteLine($"\tParking balance: {_parkingService.GetBalance()}");
+            Console.WriteLine($"\tParking balance: {await _apiService.GetBalanceParking()}");
         }
 
         //Display the list of Tr. vehicles located in the Parking lot
-        private void DisplayNumberFreeAndOccupiedSpaces()
+        private async void DisplayNumberFreeAndOccupiedSpaces()
         {
             Console.WriteLine($"\tNumber of free - " +
-                $"{_parkingService.GetFreePlaces()} / employed -" +
-                $" {_parkingService.GetCapacity() - _parkingService.GetFreePlaces()}");
+                $"{await _apiService.GetFreePlacesParking()} / employed -" +
+                $" {await _apiService.GetCapacityParking() - await _apiService.GetFreePlacesParking()}");
         }
 
         //Display the amount of earned funds for the current period (before recording in the log)
-        private void DisplayEarnings()
+        private async void DisplayEarnings()
         {
-            var transactionsLog = _parkingService.GetLastParkingTransactions();
+            var transactionsLog = await _apiService.GetLastTransaction();
 
             if (transactionsLog != null)
             {
@@ -46,11 +49,11 @@ namespace CoolParking.BL
         }
 
         //Display the history of Transactions on the screen (reading data from the Transactions.log file)
-        private void DisplayTransactionHistory()
+        private async void DisplayTransactionHistory()
         {
             try
             {
-                string arrayTransaction = _parkingService.ReadFromLog();
+                string arrayTransaction = await _apiService.GetTransactionAll();
 
                 var transactions = arrayTransaction.Split(new string[] { "\r" }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -66,11 +69,11 @@ namespace CoolParking.BL
         }
 
         //Display the list of Tr. vehicles located in the Parking lot
-        private void DisplayListTrFundsLocated()
+        private async void DisplayListTrFundsLocated()
         {
-            if (_parkingService.GetFreePlaces() < Settings.parkingCapacity)
+            if (await _apiService.GetFreePlacesParking() < Settings.ParkingCapacity)
             {
-                int count = default(int);
+                int count = 0;
                 Console.WriteLine($"\tVehicle list:\n");
 
                 foreach (var item in _parkingService.GetVehicles())
@@ -85,12 +88,13 @@ namespace CoolParking.BL
         }
 
         //Put the Vehicle in Parking
-        private void PutTrAidForParking()
+        private async void PutTrAidForParking()
         {
             try
             {
+                //Написать метод, который лучше генерировал транспортное средство
                 var vehicle = new Vehicle(Vehicle.GenerateRandomRegistrationPlateNumber(), VehicleType.Truck, 100);
-                _parkingService.AddVehicle(vehicle);
+                await _apiService.AddVehicle(vehicle);
                 Console.WriteLine($"\tAdded to the parking car - Id:{vehicle.Id} VehicleType:{vehicle.VehicleType} Balance:{vehicle.Balance}");
             }
             catch (Exception ex)
@@ -100,9 +104,11 @@ namespace CoolParking.BL
         }
 
         //Pick up the Vehicle from the Parking lot
-        private void PickUpVehicle()
+        private async void PickUpVehicle()
         {
-            if (_parkingService.GetVehicles().Count > 0)
+            var res = await _apiService.GetAllVehicleses();
+
+            if (res.Count() > 0)
             {
                 try
                 {
@@ -111,10 +117,10 @@ namespace CoolParking.BL
                     string? id = Console.ReadLine();
 
                     var vehicleses = _parkingService.GetVehicles();
-
+                    //Заменить
                     if (id != null && int.TryParse(id, out int convertId) && convertId > 0 && convertId <= vehicleses.Count)
                     {
-                        _parkingService.RemoveVehicle(vehicleses[convertId - 1].Id);
+                        await _apiService.DeleteVehicle(vehicleses[convertId - 1].Id);
                     }
                 }
                 catch (Exception ex)
@@ -129,51 +135,35 @@ namespace CoolParking.BL
         }
 
         //Replenish the balance of a specific financial instrument.
-        private void TopUpBalanceCar()
+        private async void TopUpBalanceCar()
         {
-            try
-            {
-                if (_parkingService.GetVehicles().Count > 0)
-                {
-                    Console.WriteLine("\tSpecify the index of the vehicle");
-                    DisplayListTrFundsLocated();
-                    string? id = Console.ReadLine();
-                    Console.WriteLine("\tEnter replenishment amount");
-                    string? topUpAmount = Console.ReadLine();
-                    var vehicleses = _parkingService.GetVehicles();
+            Console.WriteLine("\tEnter vehicle number:");
+            string? id = Console.ReadLine();
+            Console.WriteLine("\tEnter replenishment amount:");
+            string? topUpAmount = Console.ReadLine();
 
-                    if (id != null && int.TryParse(id, out int convertIndex) && int.TryParse(topUpAmount, out int convertTopUpAmount) && convertIndex > 0 && convertIndex <= vehicleses.Count)
-                    {
-                        _parkingService.TopUpVehicle(vehicleses[convertIndex - 1].Id, convertTopUpAmount);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("\tThere are no cars in the parking lot");
-                }
-            }
-            catch (Exception ex) 
+            if (Validation.IsValidId(id) && Validation.IsPositive(topUpAmount))
             {
-                Console.WriteLine($"\t{ex.Message}");
+                await _apiService.TopUpVehicle(id, Decimal.Parse(topUpAmount));
+            }
+            else
+            {
+                Console.WriteLine("\tEnter incorrect data");
             }
         }
 
         //Display all Parking Transactions for the current period (before logging)
-        private void DisplayAllTransactionsCurrentPeriod()
+        private async void DisplayAllTransactionsCurrentPeriod()
         {
-            var transactionInfo = _parkingService.GetLastParkingTransactions();
+            var transactionInfo = await _apiService.GetLastTransaction();
 
             if (transactionInfo!=null && transactionInfo.Length > 0)
             {
-
-                if (transactionInfo != null)
+                foreach (var transaction in transactionInfo)
                 {
-                    foreach (var transaction in transactionInfo)
+                    if (transaction != null)
                     {
-                        if (transaction != null)
-                        {
-                            Console.WriteLine($"\tId:{transaction.VehicleId} Date:{transaction.TransactionTime} Sum:{transaction.Sum}\r");
-                        }
+                        Console.WriteLine($"\tId:{transaction.VehicleId} Date:{transaction.TransactionTime} Sum:{transaction.Sum}\r");
                     }
                 }
             }

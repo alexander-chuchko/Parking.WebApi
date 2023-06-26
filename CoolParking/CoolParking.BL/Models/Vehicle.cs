@@ -19,7 +19,7 @@ namespace CoolParking.BL.Models
 
         public Vehicle(string id, VehicleType vehicleType, decimal balance)
         {
-            if (IsValidId(id) && balance >= Settings.tariffs[(int)vehicleType])
+            if (IsValidId(id) && balance >= Settings.Tariffs[(int)vehicleType])
             {
                 this.Id = id;
                 this.VehicleType = vehicleType; 

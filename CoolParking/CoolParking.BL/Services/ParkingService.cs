@@ -23,7 +23,7 @@ namespace CoolParking.BL.Services
         public ParkingService(ITimerService withdrawTimer, ITimerService logTimer, ILogService logService)
         {
             parking = Parking.GetInstance();
-            parking.Vehicles = new List<Vehicle>(Settings.parkingCapacity);
+            parking.Vehicles = new List<Vehicle>(Settings.ParkingCapacity);
             _logService = logService;
             _logTimer = logTimer;
             _withdrawTimer = withdrawTimer;
@@ -37,7 +37,7 @@ namespace CoolParking.BL.Services
         //Method for adding vichel to the parking
         public void AddVehicle(Vehicle vehicle)
         {
-            if (parking.Vehicles.Count == Settings.parkingCapacity)
+            if (parking.Vehicles.Count == Settings.ParkingCapacity)
             {
                 throw new InvalidOperationException("There are no spaces in the parking lot");
             }
@@ -47,7 +47,7 @@ namespace CoolParking.BL.Services
                 throw new ArgumentException("Invalid identifier entered");
             }
 
-            if (vehicle.Balance >= Settings.tariffs[(int)vehicle.VehicleType])
+            if (vehicle.Balance >= Settings.Tariffs[(int)vehicle.VehicleType])
             {
                 parking.Vehicles.Add(vehicle);
                 StartOrStopTimer(parking.Vehicles);
@@ -100,7 +100,7 @@ namespace CoolParking.BL.Services
 
             if (vehicle != null)
             {
-                if (vehicle.Balance < Settings.initialBalanceParking)
+                if (vehicle.Balance < Settings.InitialBalanceParking)
                 {
                     throw new InvalidOperationException("Your balance is negative");
                 }
@@ -128,7 +128,7 @@ namespace CoolParking.BL.Services
             }
             else
             {
-                throw new ArgumentException("This number does not exist");
+                throw new ArgumentException("Invalid data entered");
             }
         }
 
@@ -176,15 +176,15 @@ namespace CoolParking.BL.Services
                 foreach (var vehicles in parking.Vehicles)
                 {
                     decimal sumFine = 0;
-                    decimal tariff = Settings.tariffs[(int)vehicles.VehicleType];
+                    decimal tariff = Settings.Tariffs[(int)vehicles.VehicleType];
 
                     if (vehicles.Balance < 0)
                     {
-                        sumFine = tariff * Settings.penaltyCoefficient;
+                        sumFine = tariff * Settings.PenaltyCoefficient;
                     }
                     else if (vehicles.Balance < tariff)
                     {
-                        sumFine = vehicles.Balance + ((tariff - vehicles.Balance) * Settings.penaltyCoefficient);
+                        sumFine = vehicles.Balance + ((tariff - vehicles.Balance) * Settings.PenaltyCoefficient);
                     }
                     else if (vehicles.Balance >= tariff)
                     {
@@ -225,9 +225,9 @@ namespace CoolParking.BL.Services
             if (vehicles.Count() == 1)
             {
                 parking.StartTime = DateTime.Now;
-                _withdrawTimer.Interval = Settings.paymentWriteOffPeriod * Settings.coefficient;
+                _withdrawTimer.Interval = Settings.PaymentWriteOffPeriod * Settings.Coefficient;
                 _withdrawTimer.Start();
-                _logTimer.Interval = Settings.loggingPeriod * Settings.coefficient;
+                _logTimer.Interval = Settings.LoggingPeriod * Settings.Coefficient;
                 _logTimer.Start();
             }
             else if (vehicles.Count() == 0)
