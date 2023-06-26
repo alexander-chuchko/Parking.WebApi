@@ -15,4 +15,8 @@
     <ProjectReference Include="..\CoolParking.BL\CoolParking.BL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

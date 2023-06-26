@@ -40,7 +40,6 @@ app.Run();
 using CoolParking.BL.Interfaces;
 using CoolParking.BL.Services;
 using CoolParking.WebAPI.ServiceExtensions;
-using CoolParking.WebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

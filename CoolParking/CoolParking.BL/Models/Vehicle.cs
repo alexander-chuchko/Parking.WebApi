@@ -6,6 +6,7 @@
 //       The type of constructor is shown in the tests and the constructor should have a validation, which also is clear from the tests.
 //       Static method GenerateRandomRegistrationPlateNumber should return a randomly generated unique identifier.
 
+using Newtonsoft.Json;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -13,8 +14,11 @@ namespace CoolParking.BL.Models
 {
     public class Vehicle 
     {
+        [JsonProperty("id")] 
         public string Id { get; }
+        [JsonProperty("vehicleType")]
         public VehicleType VehicleType { get; }
+        [JsonProperty("balance")]
         public decimal Balance { get; internal set; }
 
         public Vehicle(string id, VehicleType vehicleType, decimal balance)
@@ -54,7 +58,11 @@ namespace CoolParking.BL.Models
 
         public static bool IsValidId(string id)
         {
-            return new Regex(@"^[A-Z]{2}-[0-9]{4}-[A-Z]{2}$").IsMatch(id);
+            if (!string.IsNullOrEmpty(id)) 
+            {
+                return new Regex(@"^[A-Z]{2}-[0-9]{4}-[A-Z]{2}$").IsMatch(id);
+            }
+            return false;
         }
 
         #endregion

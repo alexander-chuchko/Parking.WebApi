@@ -11,7 +11,7 @@ namespace CoolParking.WebAPI.Controllers
         private readonly IParkingService _parkingService;
         public ParkingController(IParkingService parkingService)
         {
-            this._parkingService = parkingService;
+            _parkingService = parkingService;
         }
 
         //api/parking/balance

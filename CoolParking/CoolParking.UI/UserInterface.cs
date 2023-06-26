@@ -1,6 +1,9 @@
 ﻿using CoolParking.BL.Interfaces;
 using CoolParking.BL.Models;
 using CoolParking.UI;
+using System.Data.Common;
+using System.Transactions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CoolParking.BL
 {
@@ -45,6 +48,7 @@ namespace CoolParking.BL
         //Display the list of Tr. vehicles located in the Parking lot
         private async void DisplayNumberFreeAndOccupiedSpaces()
         {
+            //Refactoring
             ClearConsole();
             DisplayInfo();
 
@@ -79,14 +83,9 @@ namespace CoolParking.BL
 
             try
             {
-                string arrayTransaction = await _apiService.GetTransactionAll();
-
-                var transactions = arrayTransaction.Split(new string[] { "\r" }, StringSplitOptions.RemoveEmptyEntries);
-
-                foreach (var item in transactions)
-                {
-                    Console.WriteLine($"\t{item}");
-                }
+               string transactions = await _apiService.GetTransactionAll();
+               string[] arrayTransaction = transactions.Split(new string[] { "\\r", "\\n", "\""  }, StringSplitOptions.RemoveEmptyEntries);
+               transactions.ToList().ForEach(i => Console.WriteLine($"\t{i}"));
             }
             catch (Exception)
             {
@@ -102,11 +101,8 @@ namespace CoolParking.BL
 
             int count = 0;
             Console.WriteLine($"\tVehicle list:\n");
-
-            foreach (var item in await _apiService.GetAllVehicleses())
-            {
-                Console.WriteLine($"\t{++count} - Id:{item.Id} VehicleType:{item.VehicleType} Balance:{item.Balance}");
-            }
+            var vehicles = await _apiService.GetAllVehicleses();
+            vehicles.ToList().ForEach(v => Console.WriteLine($"\t{++count} - Id:{v.Id} VehicleType:{v.VehicleType} Balance:{v.Balance}"));
         }
 
         //Put the Vehicle in Parking
@@ -179,13 +175,7 @@ namespace CoolParking.BL
 
             if (transactionInfo!=null && transactionInfo.Length > 0)
             {
-                foreach (var transaction in transactionInfo)
-                {
-                    if (transaction != null)
-                    {
-                        Console.WriteLine($"\tId:{transaction.VehicleId} Date:{transaction.TransactionTime} Sum:{transaction.Sum}\r");
-                    }
-                }
+                transactionInfo.ToList().ForEach(t => Console.WriteLine($"\tId:{t.VehicleId} Date:{t.TransactionTime} Sum:{t.Sum}\r"));
             }
             else
             {

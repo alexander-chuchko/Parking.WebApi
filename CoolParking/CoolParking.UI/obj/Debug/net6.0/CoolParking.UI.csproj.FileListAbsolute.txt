@@ -1,8 +1,3 @@
-E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.csproj.AssemblyReference.cache
-E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.GeneratedMSBuildEditorConfig.editorconfig
-E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.AssemblyInfoInputs.cache
-E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.AssemblyInfo.cs
-E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.csproj.CoreCompileInputs.cache
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\bin\Debug\net6.0\CoolParking.UI.exe
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\bin\Debug\net6.0\CoolParking.UI.deps.json
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\bin\Debug\net6.0\CoolParking.UI.runtimeconfig.json
@@ -11,6 +6,11 @@ E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\Co
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\bin\Debug\net6.0\Newtonsoft.Json.dll
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\bin\Debug\net6.0\CoolParking.BL.dll
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\bin\Debug\net6.0\CoolParking.BL.pdb
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.csproj.AssemblyReference.cache
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.GeneratedMSBuildEditorConfig.editorconfig
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.AssemblyInfoInputs.cache
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.AssemblyInfo.cs
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.csproj.CoreCompileInputs.cache
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.csproj.CopyComplete
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.dll
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\refint\CoolParking.UI.dll

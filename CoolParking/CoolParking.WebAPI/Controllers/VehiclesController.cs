@@ -16,15 +16,14 @@ namespace CoolParking.WebAPI.Controllers
 
         //api/vehicles
         [HttpGet]
-        public ActionResult<IEnumerable<Vehicle>> GetAll()
+        public ActionResult<IEnumerable<Vehicle>> GetAll() //Tested
         {
             return Ok(_parkingService.GetVehicles());
         }
 
-
         //api/vehicles/id 
         [HttpGet("{id}", Name = "GetById")]
-        public ActionResult<Vehicle> GetById(string id)
+        public ActionResult<Vehicle> GetById(string id) //Tested
         {
             if (!Vehicle.IsValidId(id))
             {
@@ -43,11 +42,8 @@ namespace CoolParking.WebAPI.Controllers
 
         //api/vehicles
         [HttpPost]
-        public IActionResult Add([FromBody] Vehicle vehicle)
+        public IActionResult Add([FromBody] Vehicle vehicle) //Tested
         {
-            
-            int key = (int)vehicle.VehicleType;
-
             if (!Vehicle.IsValidId(vehicle.Id))
             {
                 return BadRequest();
@@ -60,7 +56,7 @@ namespace CoolParking.WebAPI.Controllers
 
         //api/vehicles/id
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        public IActionResult Delete(string id) //Tested
         {
             if (!Vehicle.IsValidId(id))
             {
@@ -78,6 +74,5 @@ namespace CoolParking.WebAPI.Controllers
 
             return NoContent();
         }
-
     }
 }

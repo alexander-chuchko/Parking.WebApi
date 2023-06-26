@@ -11,12 +11,12 @@ namespace CoolParking.WebAPI.Controllers
         private readonly IParkingService _parkingService;
         public TransactionsController(IParkingService parkingService)
         {
-            this._parkingService = parkingService;
+            _parkingService = parkingService;
         }
 
         //api/transactions/last
         [HttpGet("last")]
-        public ActionResult<TransactionInfo[]> GetLastTransaction()
+        public ActionResult<TransactionInfo[]> GetLastTransaction() //Tested
         {
             var lastTransactions = _parkingService.GetLastParkingTransactions();
 
@@ -30,7 +30,7 @@ namespace CoolParking.WebAPI.Controllers
 
         [HttpGet("all")]
         //api/transactions/all 
-        public ActionResult<string> GetAllTransaction()
+        public ActionResult<string> GetAllTransaction() //Tested
         {
             var transactions = _parkingService.ReadFromLog();
 
@@ -42,9 +42,9 @@ namespace CoolParking.WebAPI.Controllers
             return Ok(transactions);
         }
 
-        //api/ransactions/topUpVehicle
+        //api/transactions/topUpVehicle
         [HttpPut("topUpVehicle")]
-        public ActionResult<Vehicle> GetTopVehicle([FromBody] Vehicle vehicle)
+        public ActionResult<Vehicle> GetTopVehicle([FromBody] Vehicle vehicle) //Tested
         {
             if (!Vehicle.IsValidId(vehicle.Id) || vehicle.Balance <= 0)
             {
@@ -60,7 +60,7 @@ namespace CoolParking.WebAPI.Controllers
 
             _parkingService.TopUpVehicle(vehicle.Id, vehicle.Balance);
 
-            return Ok();
+            return Ok(foundVehicle);
         }
     }
 }

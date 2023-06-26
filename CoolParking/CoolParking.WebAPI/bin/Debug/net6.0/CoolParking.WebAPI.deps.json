@@ -409,6 +409,9 @@
         }
       },
       "CoolParking.BL/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
         "runtime": {
           "CoolParking.BL.dll": {}
         }

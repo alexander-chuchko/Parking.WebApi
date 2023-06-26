@@ -1203,6 +1203,9 @@
       "xunit.runner.visualstudio/2.4.5": {},
       "XunitXml.TestLogger/3.0.70": {},
       "CoolParking.BL/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
         "runtime": {
           "CoolParking.BL.dll": {}
         }

@@ -29,7 +29,6 @@ namespace CoolParking.BL.Services
             _withdrawTimer = withdrawTimer;
             this._logTimer.Elapsed += OnLogRecord;
             this._withdrawTimer.Elapsed += OnWithdrawFunds;
-
         }
 
         #region  ---  Interface IParkingService implementation   ---
@@ -140,13 +139,13 @@ namespace CoolParking.BL.Services
         {  
             string transactions = string.Empty;
 
-            if (transactionInfo != null)
+            if (transactionInfo != null && transactionInfo.Length > 0)
             {
                 foreach (var transaction in transactionInfo)
                 {
                     if (transaction != null)
                     {
-                        transactions += $"Id:{transaction.VehicleId} Date:{transaction.TransactionTime} Sum:{transaction.Sum}\r";
+                        transactions += transaction.ToString(); //$"Id:{transaction.VehicleId} Date:{transaction.TransactionTime} Sum:{transaction.Sum}\r";
                     }
                 }
             }
@@ -178,6 +177,7 @@ namespace CoolParking.BL.Services
                     decimal sumFine = 0;
                     decimal tariff = Settings.Tariffs[(int)vehicles.VehicleType];
 
+                    /*
                     if (vehicles.Balance < 0)
                     {
                         sumFine = tariff * Settings.PenaltyCoefficient;
@@ -189,7 +189,8 @@ namespace CoolParking.BL.Services
                     else if (vehicles.Balance >= tariff)
                     {
                         sumFine = tariff;
-                    }
+                    }*/
+                    sumFine = GetPenaltySum(vehicles.Balance, tariff);
 
                     vehicles.Balance -= sumFine;
                     parking.Balance += sumFine;
@@ -199,6 +200,26 @@ namespace CoolParking.BL.Services
                     count++;
                 }
             }
+        }
+
+        private decimal GetPenaltySum(decimal balance, decimal tariff)
+        {
+            decimal sumFine = 0;
+            
+            if (balance < 0)
+            {
+                sumFine = tariff * Settings.PenaltyCoefficient;
+            }
+            else if (balance < tariff)
+            {
+                sumFine = balance + ((tariff - balance) * Settings.PenaltyCoefficient);
+            }
+            else if (balance >= tariff)
+            {
+                sumFine = tariff;
+            }
+
+            return sumFine;    
         }
 
         private TransactionInfo CreateTransactionInfo(Vehicle vehicle, decimal sumFine)
