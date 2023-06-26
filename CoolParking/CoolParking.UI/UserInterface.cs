@@ -184,9 +184,9 @@ namespace CoolParking.BL
                 "8 - Display transaction history\n\t" +
                 "9 - Display all parking transactions for the current period");
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            ChangedColor(ConsoleColor.Yellow);
             Console.WriteLine("\n\tSelect the desired item:\n");
-            Console.ForegroundColor = ConsoleColor.White;
+            ChangedColor(ConsoleColor.White);
         }
 
         public void RunApplication()
