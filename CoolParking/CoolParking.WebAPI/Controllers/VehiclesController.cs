@@ -48,14 +48,16 @@ namespace CoolParking.WebAPI.Controllers
         [HttpPost]
         public IActionResult Add([FromBody] VehicleDTO vehicleDTO) 
         {
-            if (!Vehicle.IsValidId(vehicleDTO.Id) && vehicleDTO.Balance >= Settings.Tariffs[(int)vehicleDTO.VehicleType])
+            try
+            {
+                _vehicleService.AddVehicle(vehicleDTO);
+
+                return CreatedAtRoute("GetById", new { id = vehicleDTO.Id }, vehicleDTO);
+            }
+            catch (Exception)
             {
                 return BadRequest();
             }
-
-            _vehicleService.AddVehicle(vehicleDTO);
-
-            return CreatedAtRoute("GetById", new { id = vehicleDTO.Id }, vehicleDTO);
         }
 
         //api/vehicles/id
