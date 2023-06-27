@@ -54,9 +54,9 @@ namespace CoolParking.WebAPI.Controllers
 
                 return CreatedAtRoute("GetById", new { id = vehicleDTO.Id }, vehicleDTO);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
 
