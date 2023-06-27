@@ -2,6 +2,8 @@
 using CoolParking.BL.Models;
 using CoolParking.Common.DTO;
 using CoolParking.UI;
+using System;
+using System.Xml.Linq;
 
 namespace CoolParking.BL
 {
@@ -110,6 +112,14 @@ namespace CoolParking.BL
             }
         }
 
+        private void ShowCarCategories()
+        {
+            Console.WriteLine("\tSelect the type of vehicle by entering its index.\n");
+            string[] vehicleNames = Enum.GetNames(typeof(VehicleTypeDTO));
+            int index = 0;
+            vehicleNames.ToList().ForEach(v => Console.WriteLine($"\t{++index}. {v}\n"));
+        }
+
         //Put the Vehicle in Parking
         private void PutVehicleAidForParking()
         {
@@ -118,12 +128,28 @@ namespace CoolParking.BL
 
             try
             {
-                var vehicle = new VehicleDTO();
-                vehicle.Balance = 100;
-                vehicle.Id = Vehicle.GenerateRandomRegistrationPlateNumber();
-                vehicle.VehicleType = VehicleTypeDTO.Truck;
-                var addedVehicle = _apiService.AddVehicleAsync(vehicle).GetAwaiter().GetResult();
-                Console.WriteLine($"\tAdded to the parking car - Id:{addedVehicle.Id} VehicleType:{addedVehicle.VehicleType} Balance:{addedVehicle.Balance}");
+                Console.WriteLine("\tEnter vehicle number");
+                string? id = Console.ReadLine();
+
+                ShowCarCategories();
+                string? vehicleType = Console.ReadLine();
+                bool isValidMenuItem = Validation.IsValidMenuItem(vehicleType, Enum.GetValues(typeof(VehicleTypeDTO)).Length);
+                Console.WriteLine("\tPut money on your balance\n");
+                string? sum = Console.ReadLine();
+
+                if (Validation.IsValidId(id) && isValidMenuItem && Validation.IsPositive(sum))
+                {
+                    VehicleDTO vehicleDTO = new VehicleDTO();
+                    vehicleDTO.Id = id;
+                    vehicleDTO.VehicleType = (VehicleTypeDTO)Enum.GetValues(typeof(VehicleTypeDTO)).GetValue(int.Parse(vehicleType) - 1);
+                    vehicleDTO.Balance = decimal.Parse(sum);
+                    var addedVehicle = _apiService.AddVehicleAsync(vehicleDTO).GetAwaiter().GetResult();
+                    Console.WriteLine($"\tAdded to the parking car - Id:{addedVehicle.Id} VehicleType:{addedVehicle.VehicleType} Balance:{addedVehicle.Balance}");
+                }
+                else 
+                {
+                    Console.WriteLine("\tEnter incorrect data");
+                }
             }
             catch (Exception ex)
             {

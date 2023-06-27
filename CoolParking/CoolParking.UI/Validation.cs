@@ -11,7 +11,11 @@ namespace CoolParking.UI
     {
         public static bool IsValidId(string id)
         {
-            return new Regex(@"^[A-Z]{2}-[0-9]{4}-[A-Z]{2}$").IsMatch(id);
+            if (!string.IsNullOrEmpty(id))
+            {
+                return new Regex(@"^[A-Z]{2}-[0-9]{4}-[A-Z]{2}$").IsMatch(id);
+            }
+            return false;
         }
 
         public static bool IsPositive(string input) 
