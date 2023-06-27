@@ -68,9 +68,6 @@ namespace CoolParking.BL.Services
                 {
                     vehicles = await response.Content.ReadFromJsonAsync<IEnumerable<VehicleDTO>>();
                 }
-
-                ShowStatusCode(response.StatusCode, nameof(GetAllVehicleses));
-                
             }
             catch (HttpRequestException ex)
             {
