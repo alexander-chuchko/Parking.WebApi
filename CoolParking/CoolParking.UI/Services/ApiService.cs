@@ -22,7 +22,7 @@ namespace CoolParking.BL.Services
         }
 
         #region ---Methods for vechicleses---
-        public async Task<VehicleDTO> AddVehicle(VehicleDTO vehicles)
+        public async Task<VehicleDTO> AddVehicleAsync(VehicleDTO vehicles)
         {
             VehicleDTO? addedVehicle = null;
 
@@ -54,7 +54,7 @@ namespace CoolParking.BL.Services
             return addedVehicle;
         }
 
-        public async Task<IEnumerable<VehicleDTO>> GetAllVehicleses()
+        public async Task<IEnumerable<VehicleDTO>> GetAllVehiclesesAsync()
         {
             IEnumerable<VehicleDTO>? vehicles = null;
 
@@ -85,7 +85,7 @@ namespace CoolParking.BL.Services
             return vehicles;
         }
 
-        public async Task<VehicleDTO> GetByIdVehicle(string id)
+        public async Task<VehicleDTO> GetByIdVehicleAsync(string id)
         {
             VehicleDTO? addedVehicle = null;
 
@@ -116,7 +116,7 @@ namespace CoolParking.BL.Services
             return addedVehicle;
         }
 
-        public async Task DeleteVehicle(string id)
+        public async Task DeleteVehicleAsync(string id)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace CoolParking.BL.Services
 
                 if (response.IsSuccessStatusCode && response.IsSuccessStatusCode)
                 {
-                    ShowStatusCode(response.StatusCode, nameof(DeleteVehicle));
+                    ShowStatusCode(response.StatusCode, nameof(DeleteVehicleAsync));
                 }
             }
             catch (Exception ex)
@@ -139,7 +139,7 @@ namespace CoolParking.BL.Services
 
         #region ---Methods for transaction---
 
-        public async Task<TransactionInfoDTO[]> GetLastTransaction()
+        public async Task<TransactionInfoDTO[]> GetLastTransactionAsync()
         {
             TransactionInfoDTO[]? transactionInfos = null;
 
@@ -169,7 +169,7 @@ namespace CoolParking.BL.Services
 
             return transactionInfos;
         }
-        public async Task<string> GetTransactionAll()
+        public async Task<string> GetTransactionAllAsync()
         {
             string? transactions = null;
 
@@ -200,7 +200,7 @@ namespace CoolParking.BL.Services
             return transactions;
         }
 
-        public async Task<VehicleDTO> TopUpVehicle(string id, decimal sum)
+        public async Task<VehicleDTO> TopUpVehicleAsync(string id, decimal sum)
         {
             VehicleDTO? vehicle = null;
 
@@ -236,7 +236,7 @@ namespace CoolParking.BL.Services
         #endregion
 
         #region ---Methods for parking---
-        public async Task<int> GetCapacityParking()
+        public async Task<int> GetCapacityParkingAsync()
         {
             int capacity = 0;
 
@@ -267,7 +267,7 @@ namespace CoolParking.BL.Services
             return capacity;
         }
 
-        public async Task<int> GetFreePlacesParking()
+        public async Task<int> GetFreePlacesParkingAsync()
         {
             int freePlaces = 0;
 
@@ -298,7 +298,7 @@ namespace CoolParking.BL.Services
             return freePlaces;
         }
 
-        public async Task<decimal> GetBalanceParking()
+        public async Task<decimal> GetBalanceParkingAsync()
         {
             decimal balance = 0;
 
