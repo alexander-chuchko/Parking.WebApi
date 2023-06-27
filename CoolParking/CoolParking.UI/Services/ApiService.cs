@@ -1,5 +1,8 @@
 ﻿using CoolParking.BL.Interfaces;
 using CoolParking.BL.Models;
+using CoolParking.Common.DTO;
+using CoolParking.UI;
+using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -10,10 +13,6 @@ namespace CoolParking.BL.Services
     {
         private HttpClient _client;
 
-        public const string WEB_API_VECHICLE = "api/vehicles";
-        public const string WEB_API_PARKING = "api/parking";
-        public const string WEB_API_TRANSACTION = "api/transactions";
-
         public ApiService()
         {
             _client = new HttpClient();
@@ -23,53 +22,63 @@ namespace CoolParking.BL.Services
         }
 
         #region ---Methods for vechicleses---
-        public async Task<Vehicle> AddVehicle(Vehicle vehicles)
+        public async Task<VehicleDTO> AddVehicle(VehicleDTO vehicles)
         {
-            Vehicle? addedVehicle = null;
+            VehicleDTO? addedVehicle = null;
 
             try
             {
-                HttpResponseMessage response = await _client.PostAsJsonAsync(WEB_API_VECHICLE, vehicles);
+                HttpResponseMessage response = await _client.PostAsJsonAsync(Constants.WEB_API_VECHICLE, vehicles);
 
                 response.EnsureSuccessStatusCode();
 
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode && response.StatusCode == HttpStatusCode.Created)
                 {
-                    if (response.StatusCode == HttpStatusCode.Created)
-                    {
-                        addedVehicle = await response.Content.ReadFromJsonAsync<Vehicle>();
-                    }
-
-                    //ShowStatusCode(response.StatusCode, nameof(AddVehicle));
+                    addedVehicle = await response.Content.ReadFromJsonAsync<VehicleDTO>();
                 }
+
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"\tHTTP Request Error: {ex.Message}");
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"\tJSON Deserialization Error: {ex.Message}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error:{ex.Message}");
+                Console.WriteLine($"\tError:{ex.Message}");
             }
 
             return addedVehicle;
         }
 
-        public async Task<IEnumerable<Vehicle>> GetAllVehicleses()
+        public async Task<IEnumerable<VehicleDTO>> GetAllVehicleses()
         {
-            IEnumerable<Vehicle>? vehicles = null;
+            IEnumerable<VehicleDTO>? vehicles = null;
 
             try
             {
-                HttpResponseMessage response = await _client.GetAsync(WEB_API_VECHICLE);
+                HttpResponseMessage response = await _client.GetAsync(Constants.WEB_API_VECHICLE);
 
                 response.EnsureSuccessStatusCode();
 
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode && response.StatusCode == HttpStatusCode.OK)
                 {
-                    if (response.StatusCode == HttpStatusCode.OK)
-                    {
-                        vehicles = await response.Content.ReadFromJsonAsync<IEnumerable<Vehicle>>();
-                    }
-
-                    ShowStatusCode(response.StatusCode, nameof(GetAllVehicleses));
+                    vehicles = await response.Content.ReadFromJsonAsync<IEnumerable<VehicleDTO>>();
                 }
+
+                ShowStatusCode(response.StatusCode, nameof(GetAllVehicleses));
+                
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"\tHTTP Request Error: {ex.Message}");
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"\tJSON Deserialization Error: {ex.Message}");
             }
             catch (Exception ex)
             {
@@ -79,29 +88,32 @@ namespace CoolParking.BL.Services
             return vehicles;
         }
 
-        public async Task<Vehicle> GetByIdVehicle(string id)
+        public async Task<VehicleDTO> GetByIdVehicle(string id)
         {
-            Vehicle? addedVehicle = null;
+            VehicleDTO? addedVehicle = null;
 
             try
             {
-                HttpResponseMessage response = await _client.GetAsync($"{WEB_API_VECHICLE}/{id}");
+                HttpResponseMessage response = await _client.GetAsync($"{Constants.WEB_API_VECHICLE}/{id}");
 
                 response.EnsureSuccessStatusCode();
 
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode && response.StatusCode == HttpStatusCode.OK)
                 {
-                    if (response.StatusCode == HttpStatusCode.OK)
-                    {
-                        addedVehicle = await response.Content.ReadFromJsonAsync<Vehicle>();
-                    }
-
-                    //ShowStatusCode(response.StatusCode, nameof(GetByIdVehicle));
+                    addedVehicle = await response.Content.ReadFromJsonAsync<VehicleDTO>();
                 }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"\tHTTP Request Error: {ex.Message}");
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"\tJSON Deserialization Error: {ex.Message}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error:{ex.Message}");
+                Console.WriteLine($"\tError:{ex.Message}");
             }
 
             return addedVehicle;
@@ -109,13 +121,20 @@ namespace CoolParking.BL.Services
 
         public async Task DeleteVehicle(string id)
         {
-            HttpResponseMessage response = await _client.DeleteAsync($"{WEB_API_VECHICLE}/{id}");
-
-            response.EnsureSuccessStatusCode();
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                ShowStatusCode(response.StatusCode, nameof(DeleteVehicle));
+                HttpResponseMessage response = await _client.DeleteAsync($"{Constants.WEB_API_VECHICLE}/{id}");
+
+                response.EnsureSuccessStatusCode();
+
+                if (response.IsSuccessStatusCode && response.IsSuccessStatusCode)
+                {
+                    ShowStatusCode(response.StatusCode, nameof(DeleteVehicle));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\tError:{ex.Message}");
             }
         }
 
@@ -123,28 +142,28 @@ namespace CoolParking.BL.Services
 
         #region ---Methods for transaction---
 
-        public async Task<TransactionInfo[]> GetLastTransaction()
+        public async Task<TransactionInfoDTO[]> GetLastTransaction()
         {
-            TransactionInfo[]? transactionInfos = null;
+            TransactionInfoDTO[]? transactionInfos = null;
 
             try
             {
-                HttpResponseMessage response = await _client.GetAsync($"{WEB_API_TRANSACTION}/last");
+                HttpResponseMessage response = await _client.GetAsync($"{Constants.WEB_API_TRANSACTION}/last");
 
                 response.EnsureSuccessStatusCode();
 
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode && response.StatusCode == HttpStatusCode.OK)
                 {
-                    if (response.StatusCode == HttpStatusCode.OK)
-                    {
-
-                        transactionInfos = await response.Content.ReadFromJsonAsync<TransactionInfo[]>();
-                    }
-
-                    //ShowStatusCode(response.StatusCode, nameof(GetLastTransaction));
+                    transactionInfos = await response.Content.ReadFromJsonAsync<TransactionInfoDTO[]>();
                 }
-
-                return transactionInfos;
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"\tHTTP Request Error: {ex.Message}");
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"\tJSON Deserialization Error: {ex.Message}");
             }
             catch (Exception ex)
             {
@@ -159,20 +178,22 @@ namespace CoolParking.BL.Services
 
             try
             {
-                HttpResponseMessage response = await _client.GetAsync($"{WEB_API_TRANSACTION}/all");
+                HttpResponseMessage response = await _client.GetAsync($"{Constants.WEB_API_TRANSACTION}/all");
 
                 response.EnsureSuccessStatusCode();
 
-
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode && response.StatusCode == HttpStatusCode.OK)
                 {
-                    if (response.StatusCode == HttpStatusCode.OK)
-                    {
-                        transactions = await response.Content.ReadAsStringAsync();
-                    }
-
-                    //ShowStatusCode(response.StatusCode, nameof(GetTransactionAll));
+                    transactions = await response.Content.ReadAsStringAsync();
                 }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"\tHTTP Request Error: {ex.Message}");
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"\tJSON Deserialization Error: {ex.Message}");
             }
             catch (Exception ex)
             {
@@ -182,29 +203,30 @@ namespace CoolParking.BL.Services
             return transactions;
         }
 
-        //topUpVehicle
-        public async Task<Vehicle> TopUpVehicle(string id, decimal sum)
+        public async Task<VehicleDTO> TopUpVehicle(string id, decimal sum)
         {
-            Vehicle? vehicle = null;
+            VehicleDTO? vehicle = null;
 
             try
             {
                 var parametrs = new Vehicle(id, VehicleType.PassengerCar, sum);
 
-                HttpResponseMessage response = await _client.PutAsJsonAsync($"{WEB_API_TRANSACTION}/topUpVehicle", parametrs);
+                HttpResponseMessage response = await _client.PutAsJsonAsync($"{Constants.WEB_API_TRANSACTION}/topUpVehicle", parametrs);
 
                 response.EnsureSuccessStatusCode();
 
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode && response.StatusCode == HttpStatusCode.OK)
                 {
-                    if (response.StatusCode == HttpStatusCode.OK)
-                    {
-                        vehicle = await response.Content.ReadFromJsonAsync<Vehicle>();
-                    }
-
-                    //ShowStatusCode(response.StatusCode, nameof(TopUpVehicle));
-
+                    vehicle = await response.Content.ReadFromJsonAsync<VehicleDTO>();
                 }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"\tHTTP Request Error: {ex.Message}");
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"\tJSON Deserialization Error: {ex.Message}");
             }
             catch (Exception ex)
             {
@@ -213,7 +235,6 @@ namespace CoolParking.BL.Services
 
             return vehicle;
         }
-
 
         #endregion
 
@@ -224,20 +245,22 @@ namespace CoolParking.BL.Services
 
             try
             {
-                HttpResponseMessage response = await _client.GetAsync($"{WEB_API_PARKING}/capacity");
+                HttpResponseMessage response = await _client.GetAsync($"{Constants.WEB_API_PARKING}/capacity");
 
                 response.EnsureSuccessStatusCode();
 
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode && response.StatusCode == HttpStatusCode.OK)
                 {
-                    if (response.StatusCode == HttpStatusCode.OK)
-                    {
-                        capacity = await response.Content.ReadFromJsonAsync<int>();
-                    }
-
-                    //ShowStatusCode(response.StatusCode, nameof(GetCapacityParking));
-
+                    capacity = await response.Content.ReadFromJsonAsync<int>();
                 }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"\tHTTP Request Error: {ex.Message}");
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"\tJSON Deserialization Error: {ex.Message}");
             }
             catch (Exception ex)
             {
@@ -253,19 +276,22 @@ namespace CoolParking.BL.Services
 
             try
             {
-                HttpResponseMessage response = await _client.GetAsync($"{WEB_API_PARKING}/freePlaces");
+                HttpResponseMessage response = await _client.GetAsync($"{Constants.WEB_API_PARKING}/freePlaces");
 
                 response.EnsureSuccessStatusCode();
 
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode && response.StatusCode == HttpStatusCode.OK)
                 {
-                    if (response.StatusCode == HttpStatusCode.OK)
-                    {
-                        freePlaces = await response.Content.ReadFromJsonAsync<int>();
-                    }
-
-                    //ShowStatusCode(response.StatusCode, nameof(GetFreePlacesParking));
+                    freePlaces = await response.Content.ReadFromJsonAsync<int>();
                 }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"\tHTTP Request Error: {ex.Message}");
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"\tJSON Deserialization Error: {ex.Message}");
             }
             catch (Exception ex)
             {
@@ -281,19 +307,22 @@ namespace CoolParking.BL.Services
 
             try
             {
-                HttpResponseMessage response = await _client.GetAsync($"{WEB_API_PARKING}/balance");
+                HttpResponseMessage response = await _client.GetAsync($"{Constants.WEB_API_PARKING}/balance");
 
                 response.EnsureSuccessStatusCode();
 
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode && response.StatusCode == HttpStatusCode.OK)
                 {
-                    if (response.StatusCode == HttpStatusCode.OK)
-                    {
-                        balance = await response.Content.ReadFromJsonAsync<int>();
-                    }
-
-                    //ShowStatusCode(response.StatusCode, nameof(GetBalanceParking));
+                    balance = await response.Content.ReadFromJsonAsync<int>();
                 }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"\tHTTP Request Error: {ex.Message}");
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"\tJSON Deserialization Error: {ex.Message}");
             }
             catch (Exception ex)
             {

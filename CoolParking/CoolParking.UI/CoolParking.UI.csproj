@@ -13,10 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CoolParking.BL\CoolParking.BL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\CoolParking.Common\CoolParking.Common.csproj" />
   </ItemGroup>
 
 </Project>

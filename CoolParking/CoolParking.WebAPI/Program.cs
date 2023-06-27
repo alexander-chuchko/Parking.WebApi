@@ -50,6 +50,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.RegisterCustomServices();
+builder.Services.RegisterAutoMapper();
 
 var app = builder.Build();
 

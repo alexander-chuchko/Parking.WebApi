@@ -1,5 +1,7 @@
 ﻿using CoolParking.BL.Interfaces;
 using CoolParking.BL.Models;
+using CoolParking.Common.DTO;
+using CoolParking.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoolParking.WebAPI.Controllers
@@ -9,17 +11,20 @@ namespace CoolParking.WebAPI.Controllers
     public class TransactionsController : ControllerBase
     {
         private readonly IParkingService _parkingService;
-        public TransactionsController(IParkingService parkingService)
+        private readonly ITransactionInfoService _transactionInfoService;
+        public TransactionsController(IParkingService parkingService, ITransactionInfoService transactionInfoService)
         {
             _parkingService = parkingService;
+            _transactionInfoService = transactionInfoService;   
         }
 
         //api/transactions/last
         [HttpGet("last")]
-        public ActionResult<TransactionInfo[]> GetLastTransaction() //Tested
+        public ActionResult<TransactionInfoDTO[]> GetLastTransaction() //Tested
         {
-            var lastTransactions = _parkingService.GetLastParkingTransactions();
 
+            //var lastTransactions = _parkingService.GetLastParkingTransactions();
+            var lastTransactions = _transactionInfoService.GetLastParkingTransactions();
             if (lastTransactions == null)
             {
                 return NoContent();
@@ -44,7 +49,7 @@ namespace CoolParking.WebAPI.Controllers
 
         //api/transactions/topUpVehicle
         [HttpPut("topUpVehicle")]
-        public ActionResult<Vehicle> GetTopVehicle([FromBody] Vehicle vehicle) //Tested
+        public ActionResult<VehicleDTO> GetTopVehicle([FromBody] VehicleDTO vehicle) //Tested
         {
             if (!Vehicle.IsValidId(vehicle.Id) || vehicle.Balance <= 0)
             {

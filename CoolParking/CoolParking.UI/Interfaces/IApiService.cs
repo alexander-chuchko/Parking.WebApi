@@ -6,18 +6,19 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using CoolParking.BL.Models;
+using CoolParking.Common.DTO;
 
 namespace CoolParking.BL.Interfaces
 {
     public interface IApiService
     {
-        Task<Vehicle> AddVehicle(Vehicle vehicles);
-        Task<IEnumerable<Vehicle>> GetAllVehicleses();
-        Task<Vehicle> GetByIdVehicle(string id);
+        Task<VehicleDTO> AddVehicle(VehicleDTO vehicles);
+        Task<IEnumerable<VehicleDTO>> GetAllVehicleses();
+        Task<VehicleDTO> GetByIdVehicle(string id);
         Task DeleteVehicle(string id);
-        Task<TransactionInfo[]> GetLastTransaction();
+        Task<TransactionInfoDTO[]> GetLastTransaction();
         Task<string> GetTransactionAll();
-        Task<Vehicle> TopUpVehicle(string id, decimal sum);
+        Task<VehicleDTO> TopUpVehicle(string id, decimal sum);
         Task<int> GetCapacityParking();
         Task<int> GetFreePlacesParking();
         Task<decimal> GetBalanceParking();
