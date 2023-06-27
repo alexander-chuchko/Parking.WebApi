@@ -22,8 +22,6 @@ namespace CoolParking.WebAPI.Controllers
         [HttpGet("last")]
         public ActionResult<TransactionInfoDTO[]> GetLastTransaction() //Tested
         {
-
-            //var lastTransactions = _parkingService.GetLastParkingTransactions();
             var lastTransactions = _transactionInfoService.GetLastParkingTransactions();
             if (lastTransactions == null)
             {
@@ -35,11 +33,11 @@ namespace CoolParking.WebAPI.Controllers
 
         [HttpGet("all")]
         //api/transactions/all 
-        public ActionResult<string> GetAllTransaction() //Tested
+        public ActionResult<string> GetAllTransaction() 
         {
             var transactions = _parkingService.ReadFromLog();
 
-            if (transactions != null && transactions.Length <= 0) //If log file not found - Status Code: 404 Not Found
+            if (transactions != null && transactions.Length <= 0) 
             {
                 return NotFound();
             }
@@ -49,7 +47,7 @@ namespace CoolParking.WebAPI.Controllers
 
         //api/transactions/topUpVehicle
         [HttpPut("topUpVehicle")]
-        public ActionResult<VehicleDTO> GetTopVehicle([FromBody] VehicleDTO vehicle) //Tested
+        public ActionResult<VehicleDTO> GetTopVehicle([FromBody] VehicleDTO vehicle) 
         {
             if (!Vehicle.IsValidId(vehicle.Id) || vehicle.Balance <= 0)
             {

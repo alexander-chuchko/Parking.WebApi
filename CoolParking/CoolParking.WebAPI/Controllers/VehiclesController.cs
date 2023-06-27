@@ -20,15 +20,14 @@ namespace CoolParking.WebAPI.Controllers
 
         //api/vehicles
         [HttpGet]
-        public ActionResult<IEnumerable<VehicleDTO>> GetAll() //Tested
+        public ActionResult<IEnumerable<VehicleDTO>> GetAll() 
         {
-            //return Ok(_parkingService.GetVehicles());
             return Ok(_vehicleService.GetVehicles());
         }
 
         //api/vehicles/id 
         [HttpGet("{id}", Name = "GetById")]
-        public ActionResult<VehicleDTO> GetById(string id) //Tested
+        public ActionResult<VehicleDTO> GetById(string id) 
         {
             if (!Vehicle.IsValidId(id))
             {
@@ -36,8 +35,6 @@ namespace CoolParking.WebAPI.Controllers
             }
 
             var vehicleDTO = _vehicleService.GetVehicleById(id);
-
-            //var vehicle = _parkingService.GetVehicles().FirstOrDefault(v => v.Id == id);
 
             if (vehicleDTO == null)
             {
@@ -49,21 +46,21 @@ namespace CoolParking.WebAPI.Controllers
 
         //api/vehicles
         [HttpPost]
-        public IActionResult Add([FromBody] VehicleDTO vehicleDTO) //Tested
+        public IActionResult Add([FromBody] VehicleDTO vehicleDTO) 
         {
             if (!Vehicle.IsValidId(vehicleDTO.Id) && vehicleDTO.Balance >= Settings.Tariffs[(int)vehicleDTO.VehicleType])
             {
                 return BadRequest();
             }
+
             _vehicleService.AddVehicle(vehicleDTO);
-            //_parkingService.AddVehicle(vehicle);
 
             return CreatedAtRoute("GetById", new { id = vehicleDTO.Id }, vehicleDTO);
         }
 
         //api/vehicles/id
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id) //Tested
+        public IActionResult Delete(string id) 
         {
 
             var vehicle = _parkingService.GetVehicles().FirstOrDefault(v => v.Id == id);
