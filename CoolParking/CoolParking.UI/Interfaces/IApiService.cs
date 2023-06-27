@@ -12,15 +12,15 @@ namespace CoolParking.BL.Interfaces
 {
     public interface IApiService
     {
-        Task<VehicleDTO> AddVehicle(VehicleDTO vehicles);
-        Task<IEnumerable<VehicleDTO>> GetAllVehicleses();
-        Task<VehicleDTO> GetByIdVehicle(string id);
-        Task DeleteVehicle(string id);
-        Task<TransactionInfoDTO[]> GetLastTransaction();
-        Task<string> GetTransactionAll();
-        Task<VehicleDTO> TopUpVehicle(string id, decimal sum);
-        Task<int> GetCapacityParking();
-        Task<int> GetFreePlacesParking();
-        Task<decimal> GetBalanceParking();
+        Task<VehicleDTO> AddVehicleAsync(VehicleDTO vehicles);
+        Task<IEnumerable<VehicleDTO>> GetAllVehiclesesAsync();
+        Task<VehicleDTO> GetByIdVehicleAsync(string id);
+        Task DeleteVehicleAsync(string id);
+        Task<TransactionInfoDTO[]> GetLastTransactionAsync();
+        Task<string> GetTransactionAllAsync();
+        Task<VehicleDTO> TopUpVehicleAsync(string id, decimal sum);
+        Task<int> GetCapacityParkingAsync();
+        Task<int> GetFreePlacesParkingAsync();
+        Task<decimal> GetBalanceParkingAsync();
     }
 }

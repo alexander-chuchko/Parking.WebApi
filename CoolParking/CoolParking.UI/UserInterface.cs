@@ -36,32 +36,32 @@ namespace CoolParking.BL
         }
 
         //Display the current Parking balance on the screen
-        private async void DisplayCurrentBalance()
+        private void DisplayCurrentBalance()
         {
             ClearConsole();
             DisplayInfo();
-            Console.WriteLine($"\tParking balance: {await _apiService.GetBalanceParking()}");
+            Console.WriteLine($"\tParking balance: {_apiService.GetBalanceParkingAsync().GetAwaiter().GetResult()}");
         }
 
         //Display the list of Tr. vehicles located in the Parking lot
-        private async void DisplayNumberFreeAndOccupiedSpaces()
+        private void DisplayNumberFreeAndOccupiedSpaces()
         {
             //Refactoring
             ClearConsole();
             DisplayInfo();
-
+            var freePlaces = _apiService.GetFreePlacesParkingAsync().GetAwaiter().GetResult();
             Console.WriteLine($"\tNumber of free - " +
-                $"{await _apiService.GetFreePlacesParking()} / employed -" +
-                $" {await _apiService.GetCapacityParking() - await _apiService.GetFreePlacesParking()}");
+                $"{freePlaces} / employed -" +
+                $" {_apiService.GetCapacityParkingAsync().GetAwaiter().GetResult() - freePlaces}");
         }
 
         //Display the amount of earned funds for the current period (before recording in the log)
-        private async void DisplayEarnings()
+        private void DisplayEarnings()
         {
             ClearConsole();
             DisplayInfo();
 
-            var transactionsLog = await _apiService.GetLastTransaction();
+            var transactionsLog = _apiService.GetLastTransactionAsync().GetAwaiter().GetResult();
 
             if (transactionsLog != null)
             {
@@ -74,14 +74,14 @@ namespace CoolParking.BL
         }
 
         //Display the history of Transactions on the screen (reading data from the Transactions.log file)
-        private async void DisplayTransactionHistory()
+        private void DisplayTransactionHistory()
         {
             ClearConsole();
             DisplayInfo();
 
             try
             {
-                string transactions = await _apiService.GetTransactionAll();
+                string transactions = _apiService.GetTransactionAllAsync().GetAwaiter().GetResult();
                 string[] arrayTransaction = transactions.Split(new string[] { "\\r", "\\n", "\""  }, StringSplitOptions.RemoveEmptyEntries);
                 arrayTransaction.ToList().ForEach(i => Console.WriteLine($"\t{i}"));
             }
@@ -99,7 +99,7 @@ namespace CoolParking.BL
 
             int count = 0;
             Console.WriteLine($"\tVehicle list:\n");
-            var vehicles = _apiService.GetAllVehicleses().GetAwaiter().GetResult();
+            var vehicles = _apiService.GetAllVehiclesesAsync().GetAwaiter().GetResult();
             if (vehicles != null && vehicles.Count() > 0)
             {
                 vehicles.ToList().ForEach(v => Console.WriteLine($"\t{++count} - Id:{v.Id} VehicleType:{v.VehicleType} Balance:{v.Balance}"));
@@ -122,7 +122,7 @@ namespace CoolParking.BL
                 vehicle.Balance = 100;
                 vehicle.Id = Vehicle.GenerateRandomRegistrationPlateNumber();
                 vehicle.VehicleType = VehicleTypeDTO.Truck;
-                var addedVehicle = _apiService.AddVehicle(vehicle).GetAwaiter().GetResult();
+                var addedVehicle = _apiService.AddVehicleAsync(vehicle).GetAwaiter().GetResult();
                 Console.WriteLine($"\tAdded to the parking car - Id:{addedVehicle.Id} VehicleType:{addedVehicle.VehicleType} Balance:{addedVehicle.Balance}");
             }
             catch (Exception ex)
@@ -132,7 +132,7 @@ namespace CoolParking.BL
         }
 
         //Pick up the vehicle from the parking lot
-        private async void PickUpVehicle()
+        private void PickUpVehicle()
         {
             ClearConsole();
             DisplayInfo();
@@ -142,7 +142,7 @@ namespace CoolParking.BL
 
             if (Validation.IsValidId(id))
             {
-                await _apiService.DeleteVehicle(id);
+                _apiService.DeleteVehicleAsync(id).GetAwaiter().GetResult();
             }
             else 
             {
@@ -163,7 +163,7 @@ namespace CoolParking.BL
 
             if (Validation.IsValidId(id) && Validation.IsPositive(topUpAmount))
             {
-                var vehicle = _apiService.TopUpVehicle(id, Decimal.Parse(topUpAmount)).GetAwaiter().GetResult();
+                var vehicle = _apiService.TopUpVehicleAsync(id, Decimal.Parse(topUpAmount)).GetAwaiter().GetResult();
                 Console.WriteLine($"\tVehicle balance successfully topped up - Id:{vehicle.Id} VehicleType:{vehicle.VehicleType} Balance:{vehicle.Balance}");
             }
             else
@@ -178,7 +178,7 @@ namespace CoolParking.BL
             ClearConsole();
             DisplayInfo();
 
-            var transactionInfo = _apiService.GetLastTransaction().GetAwaiter().GetResult();
+            var transactionInfo = _apiService.GetLastTransactionAsync().GetAwaiter().GetResult();
 
             if (transactionInfo!=null && transactionInfo.Length > 0)
             {
