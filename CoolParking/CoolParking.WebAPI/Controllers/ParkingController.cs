@@ -16,21 +16,21 @@ namespace CoolParking.WebAPI.Controllers
 
         //api/parking/balance
         [HttpGet("balance")]
-        public ActionResult<decimal> GetBalance() //Tested
+        public ActionResult<decimal> GetBalance() 
         {
             return Ok(_parkingService.GetBalance());
         }
 
         //api/parking/capacity
         [HttpGet("capacity")]
-        public ActionResult<int> GetCapacity() //Tested
+        public ActionResult<int> GetCapacity() 
         {
             return Ok(_parkingService.GetCapacity());
         }
 
         //api/parking/freePlaces
         [HttpGet("freePlaces")]
-        public ActionResult<int> GetFreePlaces() //Tested
+        public ActionResult<int> GetFreePlaces()
         {
             return Ok(_parkingService.GetFreePlaces());
         }

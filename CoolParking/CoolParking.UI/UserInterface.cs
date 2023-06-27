@@ -1,9 +1,7 @@
 ﻿using CoolParking.BL.Interfaces;
 using CoolParking.BL.Models;
+using CoolParking.Common.DTO;
 using CoolParking.UI;
-using System.Data.Common;
-using System.Transactions;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace CoolParking.BL
 {
@@ -120,8 +118,10 @@ namespace CoolParking.BL
 
             try
             {
-                //Написать метод, который лучше генерировал транспортное средство
-                var vehicle = new Vehicle(Vehicle.GenerateRandomRegistrationPlateNumber(), VehicleType.Truck, 100);
+                var vehicle = new VehicleDTO();
+                vehicle.Balance = 100;
+                vehicle.Id = Vehicle.GenerateRandomRegistrationPlateNumber();
+                vehicle.VehicleType = VehicleTypeDTO.Truck;
                 var addedVehicle = _apiService.AddVehicle(vehicle).GetAwaiter().GetResult();
                 Console.WriteLine($"\tAdded to the parking car - Id:{addedVehicle.Id} VehicleType:{addedVehicle.VehicleType} Balance:{addedVehicle.Balance}");
             }
@@ -138,7 +138,6 @@ namespace CoolParking.BL
             DisplayInfo();
 
             Console.WriteLine("\tEnter vehicle number");
-            //DisplayListVehiclesFundsLocated();
             string? id = Console.ReadLine();
 
             if (Validation.IsValidId(id))

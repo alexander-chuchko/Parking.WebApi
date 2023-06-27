@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "wjngMAFxh0Fd5EcAgg6Fbu/sFmdzks42b2x3DuG7IAzsgSxvHcI95D14uMjUfSfxR4Kv9WpzdLWH7dvjgoFgJg==",
+  "dgSpecHash": "VdpkTPBRj6A39xHSabwHPpLi4WAYXcIz+60QMvq5s+uFa83rUCQC5+jeldXCGjP8B/88MXQtujzI5h6jwqRg7g==",
   "success": true,
   "projectFilePath": "E:\\Library\\AcademyBinary\\AcademiBinary 2023\\Projects\\WebAPI\\coolparkingwebapi\\CoolParking\\CoolParking.UI\\CoolParking.UI.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\chuch\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",
+    "C:\\Users\\chuch\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\chuch\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\chuch\\.nuget\\packages\\microsoft.netcore.platforms\\1.0.1\\microsoft.netcore.platforms.1.0.1.nupkg.sha512",
     "C:\\Users\\chuch\\.nuget\\packages\\microsoft.netcore.targets\\1.0.1\\microsoft.netcore.targets.1.0.1.nupkg.sha512",
     "C:\\Users\\chuch\\.nuget\\packages\\newtonsoft.json\\9.0.1\\newtonsoft.json.9.0.1.nupkg.sha512",

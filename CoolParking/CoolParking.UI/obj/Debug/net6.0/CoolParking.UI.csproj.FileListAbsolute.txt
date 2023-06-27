@@ -17,3 +17,6 @@ E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\Co
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.pdb
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\CoolParking.UI.genruntimeconfig.cache
 E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\obj\Debug\net6.0\ref\CoolParking.UI.dll
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\bin\Debug\net6.0\AutoMapper.dll
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\bin\Debug\net6.0\CoolParking.Common.dll
+E:\Library\AcademyBinary\AcademiBinary 2023\Projects\WebAPI\coolparkingwebapi\CoolParking\CoolParking.UI\bin\Debug\net6.0\CoolParking.Common.pdb
