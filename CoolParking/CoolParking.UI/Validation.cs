@@ -25,11 +25,6 @@ namespace CoolParking.UI
             return isPositive;
         }
 
-        public static bool IsRightIndex()
-        {
-            return true;
-        }
-
         public static bool IsValidMenuItem(string item, int count)
         {
             bool isValidItem = false;   
